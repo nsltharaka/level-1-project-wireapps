@@ -12,7 +12,7 @@ export default function RootLayout() {
 function RootStack() {
   return (
     <Stack>
-      <Stack.Screen name="index" />
+      <Stack.Screen name="index" options={{ title: "Shop" }} />
     </Stack>
   );
 }
