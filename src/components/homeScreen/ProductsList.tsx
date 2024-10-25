@@ -9,7 +9,7 @@ export default function ProductsList() {
   const { products } = useShopContext();
   const router = useRouter();
 
-  const onPressItem = (itemId: string) => router.push("/_sitemap");
+  const onPressItem = (itemId: string) => router.push(`/product/${itemId}`);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
