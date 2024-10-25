@@ -1,26 +1,34 @@
 import useShopContext from "@/hooks/useShopContext";
 import React from "react";
-import {ScrollView, StyleSheet} from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import ProductCard from "./ProductCard";
-import {Product} from "@/types/product";
+import { Product } from "@/types/product";
+import { useRouter } from "expo-router";
 
 export default function ProductsList() {
-    const {products} = useShopContext();
+  const { products } = useShopContext();
+  const router = useRouter();
 
-    return (
-        <ScrollView contentContainerStyle={styles.container}>
-            {products.map((product: Product) => (
-                <ProductCard key={product.id} item={product}/>
-            ))}
-        </ScrollView>
-    );
+  const onPressItem = (itemId: string) => router.push("/_sitemap");
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      {products.map((product: Product) => (
+        <ProductCard
+          key={product.id}
+          item={product}
+          onPressHandleFunc={onPressItem}
+        />
+      ))}
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 10,
-        flexDirection: "row",
-        flexWrap: "wrap",
-        gap: 10,
-    },
+  container: {
+    padding: 10,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 10,
+  },
 });
