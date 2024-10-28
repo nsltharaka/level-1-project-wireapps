@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-export default function AddToCartButton() {
+type Props = {
+  onPress: () => void;
+};
+
+export default function AddToCartButton({ onPress }: Props) {
   return (
-    <TouchableOpacity
-      style={styles.buttonContainer}
-      onPress={() => console.warn("add item to the cart")}
-    >
+    <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
       <Text style={styles.buttonText}>Add to cart</Text>
     </TouchableOpacity>
   );

@@ -1,15 +1,20 @@
 import AddToCartButton from "@/components/AddToCartButton";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
-import useShopContext from "@/hooks/useShopContext";
-import { useLocalSearchParams } from "expo-router";
+import useCartContext from "@/hooks/useCartContext";
+import useProductContext from "@/hooks/useShopContext";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text } from "react-native";
 
 export default function ProductScreen() {
   const params = useLocalSearchParams<{ id: string }>();
 
-  const { products } = useShopContext();
+  const { products } = useProductContext();
+  const [_, dispatch] = useCartContext();
+  const router = useRouter();
+
   const selectedProduct = products.find((item) => item.id === params.id);
+  if (!selectedProduct) return null;
 
   return (
     <>
@@ -21,14 +26,22 @@ export default function ProductScreen() {
           />
         }
       >
-        <Text style={styles.itemName}>{selectedProduct?.name}</Text>
-        <Text style={styles.itemPrice}>$ {selectedProduct?.price}</Text>
-        <Text style={styles.itemColor}>{selectedProduct?.colour}</Text>
+        <Text style={styles.itemName}>{selectedProduct.name}</Text>
+        <Text style={styles.itemPrice}>$ {selectedProduct.price}</Text>
+        <Text style={styles.itemColor}>{selectedProduct.colour}</Text>
         <Text style={styles.itemDescription}>
-          {selectedProduct?.description}
+          {selectedProduct.description}
         </Text>
       </ParallaxScrollView>
-      <AddToCartButton />
+      <AddToCartButton
+        onPress={() => {
+          dispatch({
+            type: "addItem",
+            data: { ...selectedProduct, quantity: 1 },
+          });
+          router.push("/cart");
+        }}
+      />
     </>
   );
 }

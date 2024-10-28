@@ -1,4 +1,4 @@
-import useShopContext from "@/hooks/useShopContext";
+import useProductContext from "@/hooks/useShopContext";
 import { Product } from "@/types/product";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -6,7 +6,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import ProductCard from "./ProductCard";
 
 export default function ProductsList() {
-  const { products } = useShopContext();
+  const { products } = useProductContext();
   const router = useRouter();
 
   const onPressItem = (itemId: string) => router.push(`/product/${itemId}`);

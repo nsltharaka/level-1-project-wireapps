@@ -1,8 +1,8 @@
-import { ShopContext } from "@/contexts/shopContext";
+import { ProductContext } from "@/contexts/ProductsContext";
 import { useContext } from "react";
 
-export default function useShopContext() {
-  const contextValue = useContext(ShopContext);
+export default function useProductContext() {
+  const contextValue = useContext(ProductContext);
   if (!contextValue) {
     throw new Error("component must be wrapped inside ShopContextProvider");
   }

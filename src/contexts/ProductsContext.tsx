@@ -6,12 +6,16 @@ interface ShopContextType {
   products: Product[];
 }
 
-export const ShopContext = createContext<ShopContextType | null>(null);
+export const ProductContext = createContext<ShopContextType | null>(null);
 
-export default function ShopContextProvider({ children }: PropsWithChildren) {
+export default function ProductContextProvider({
+  children,
+}: PropsWithChildren) {
   const [products] = useState(() => data);
 
   return (
-    <ShopContext.Provider value={{ products }}>{children}</ShopContext.Provider>
+    <ProductContext.Provider value={{ products }}>
+      {children}
+    </ProductContext.Provider>
   );
 }
