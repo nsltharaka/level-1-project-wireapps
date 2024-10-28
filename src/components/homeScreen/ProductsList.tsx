@@ -1,9 +1,9 @@
 import useShopContext from "@/hooks/useShopContext";
+import { Product } from "@/types/product";
+import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import ProductCard from "./ProductCard";
-import { Product } from "@/types/product";
-import { useRouter } from "expo-router";
 
 export default function ProductsList() {
   const { products } = useShopContext();
