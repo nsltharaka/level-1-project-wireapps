@@ -12,9 +12,14 @@ export const CartContext = createContext<
 export default function CartContextProvider({ children }: PropsWithChildren) {
   return (
     <CartContext.Provider
-      value={useReducer(reducer, null, () => ({
-        cartItems: [],
-      }))}
+      value={useReducer(
+        reducer,
+        null,
+        (): State => ({
+          cartItems: [],
+          totalAmount: 0,
+        }),
+      )}
     >
       {children}
     </CartContext.Provider>

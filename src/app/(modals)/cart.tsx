@@ -1,12 +1,12 @@
 import useCartContext from "@/hooks/useCartContext";
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Cart() {
   const [cart, dispatch] = useCartContext();
 
   return (
-    <View>
+    <View style={styles.container}>
       {cart.cartItems.map((item) => (
         <Text key={item.id}>
           {item.name} : {item.quantity}
@@ -15,3 +15,9 @@ export default function Cart() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "lightgreen",
+  },
+});
