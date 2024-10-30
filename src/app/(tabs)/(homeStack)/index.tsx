@@ -4,15 +4,15 @@ import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
-  return (
-    <SafeAreaView style={styles.container} edges={["bottom", "left", "right"]}>
-      <ProductsList />
-    </SafeAreaView>
-  );
+    return (
+        <SafeAreaView style={styles.container} edges={["left", "right"]}>
+            <ProductsList />
+        </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+    container: {
+        flex: 1,
+    },
 });

@@ -14,18 +14,9 @@ export default function RootLayout() {
 
 function RootStack() {
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ title: "Shop" }} />
-      <Stack.Screen
-        name="product/[id]"
-        options={{
-          title: "Product details",
-        }}
-      />
-      <Stack.Screen
-        name="(modals)/cart"
-        options={{ title: "cart", presentation: "modal" }}
-      />
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="(tabs)" options={{ title: "Shop" }} />
+      <Stack.Screen name="product/[id]" options={{ headerShown: true, title: "Product Details" }} />
     </Stack>
-  );
+  )
 }

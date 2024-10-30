@@ -34,7 +34,6 @@ export default function CartItemCard({ item }: Props) {
           <TouchableOpacity style={styles.adjustButton} onPress={() => dispatch({ type: "adjustQuantity", data: { itemId: item.id, newQuantity: 1 } })}>
             <Ionicons name="add" size={22} />
           </TouchableOpacity>
-
         </View>
 
       </View>
