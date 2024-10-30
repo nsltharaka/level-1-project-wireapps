@@ -73,16 +73,26 @@ const addItem = (state: State, cartItem: CartItem): State => {
   };
 };
 
-const removeItem = (state: State, data: CartItem["id"]): State => {
-  return state;
+const removeItem = (state: State, itemId: CartItem["id"]): State => {
+
+  const updatedCartItems = state.cartItems
+    .filter(item => item.id !== itemId)
+
+  return {
+    ...state,
+    cartItems: updatedCartItems,
+    totalAmount: calculateTotal(updatedCartItems)
+  };
 };
 
 const adjustQuantity = (state: State, { itemId, newQuantity }: { itemId: CartItem['id'], newQuantity: CartItem['quantity'] }): State => {
 
-  if (newQuantity < 1) return state
-
   const updatedCartItems = state.cartItems
-    .map(item => item.id === itemId ? { ...item, quantity: item.quantity + newQuantity } : item)
+    .map(item => {
+      if (item.id !== itemId) return item
+      if (newQuantity < 0 && item.quantity === 1) return item
+      return { ...item, quantity: item.quantity + newQuantity }
+    })
 
   return {
     ...state,
@@ -91,7 +101,7 @@ const adjustQuantity = (state: State, { itemId, newQuantity }: { itemId: CartIte
   }
 }
 
-const calculateTotal: (items: CartItem[]) => State['totalAmount'] = (items: CartItem[]) => items
+const calculateTotal: (items: CartItem[]) => State['totalAmount'] = (items) => items
   .map(item => Number.parseFloat(item.price) * item.quantity)
   .reduce((a, b) => a + b, 0)
   .toFixed(2)

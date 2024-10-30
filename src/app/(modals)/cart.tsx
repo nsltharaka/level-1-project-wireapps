@@ -4,28 +4,29 @@ import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
 export default function Cart() {
-  const [cart, dispatch] = useCartContext();
+  const [cart] = useCartContext();
+
+  const FooterComponent = () => (
+    <View style={styles.cartDescription}>
+      <Text style={styles.totalAmount}>Total : $ {cart.totalAmount}</Text>
+    </View>
+  )
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={cart.cartItems}
-        contentContainerStyle={styles.ContentContainer}
-        renderItem={({ item }) => <CartItemCard item={item} />}
-      />
-      <View style={styles.cartDescription}>
-        <Text style={styles.totalAmount}>Total : $ {cart.totalAmount}</Text>
-      </View>
-    </View>
+    <FlatList
+      data={cart.cartItems}
+      contentContainerStyle={styles.ContentContainer}
+      renderItem={({ item }) => <CartItemCard item={item} />}
+      ListFooterComponent={FooterComponent}
+    />
+
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10
-  },
   ContentContainer: {
     gap: 10,
+    padding: 10
   },
   cartDescription: {
     marginTop: 20,
