@@ -16,7 +16,10 @@ function RootStack() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="(tabs)" options={{ title: "Shop" }} />
-      <Stack.Screen name="product/[id]" options={{ headerShown: true, title: "Product Details" }} />
+      <Stack.Screen
+        name="product/[id]"
+        options={{ headerShown: true, title: "Product Details" }}
+      />
     </Stack>
-  )
+  );
 }
