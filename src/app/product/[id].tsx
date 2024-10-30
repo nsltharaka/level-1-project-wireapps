@@ -6,7 +6,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text } from "react-native";
 
-export default function ProductScreen() {
+export default function ProductDetailsScreen() {
   const params = useLocalSearchParams<{ id: string }>();
 
   const { products } = useProductContext();
