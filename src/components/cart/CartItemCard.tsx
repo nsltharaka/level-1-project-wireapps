@@ -2,6 +2,7 @@ import { defaultStyles } from "@/constants/defaultStyles";
 import useCartContext from "@/hooks/useCartContext";
 import type { CartItem } from "@/types/cartItem";
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -14,9 +15,12 @@ export default function CartItemCard({ item }: Props) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
+      <TouchableOpacity
+        style={styles.imageContainer}
+        onPress={() => router.navigate(`/product/${item.id}`)}
+      >
         <Image source={{ uri: item.mainImage }} style={defaultStyles.image} />
-      </View>
+      </TouchableOpacity>
 
       <View style={styles.descriptionContainer}>
         <Text numberOfLines={2} style={defaultStyles.itemName}>
@@ -53,9 +57,10 @@ export default function CartItemCard({ item }: Props) {
       </View>
 
       <TouchableOpacity
+        style={{ alignSelf: "flex-start" }}
         onPress={() => dispatch({ type: "removeItem", data: item.id })}
       >
-        <Ionicons name="trash-outline" size={30} color={"gray"} />
+        <Ionicons name="close-circle" size={28} color={"gray"} />
       </TouchableOpacity>
     </View>
   );
@@ -93,6 +98,5 @@ const styles = StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 100,
     padding: 2,
-    backgroundColor: "lightgray",
   },
 });

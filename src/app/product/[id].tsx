@@ -39,7 +39,7 @@ export default function ProductScreen() {
             type: "addItem",
             data: { ...selectedProduct, quantity: 1 },
           });
-          router.push("/cart");
+          router.push("/(modals)/cart");
         }}
       />
     </>

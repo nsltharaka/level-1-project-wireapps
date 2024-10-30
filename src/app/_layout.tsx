@@ -14,11 +14,18 @@ export default function RootLayout() {
 
 function RootStack() {
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(tabs)" options={{ title: "Shop" }} />
+    <Stack>
+      <Stack.Screen
+        name="(tabs)"
+        options={{ headerShown: false, title: "Shop" }}
+      />
       <Stack.Screen
         name="product/[id]"
-        options={{ headerShown: true, title: "Product Details" }}
+        options={{ title: "Product Details" }}
+      />
+      <Stack.Screen
+        name="(modals)/cart"
+        options={{ title: "Cart", presentation: "modal" }}
       />
     </Stack>
   );
