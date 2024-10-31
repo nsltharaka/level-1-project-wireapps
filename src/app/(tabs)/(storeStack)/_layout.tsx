@@ -1,3 +1,4 @@
+import CartIcon from "@/components/cart/CartIcon";
 import { IOS_DEFAULT_BACKGROUND_COLOR } from "@/constants/defaultStyles";
 import { Stack } from "expo-router";
 import React from "react";
@@ -15,10 +16,12 @@ export default function StoreStack() {
             backgroundColor: IOS_DEFAULT_BACKGROUND_COLOR,
           },
           headerSearchBarOptions: {
+            headerIconColor: "#000",
             onSearchButtonPress: ({ nativeEvent: { text } }) => {
               console.log(text);
             },
           },
+          headerRight: () => <CartIcon />,
         }}
       />
     </Stack>
