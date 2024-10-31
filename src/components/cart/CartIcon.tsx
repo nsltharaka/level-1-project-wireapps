@@ -8,7 +8,12 @@ export default function CartIcon() {
   const [cart] = useCartContext();
 
   const cartItemsLength = cart.cartItems.length;
-  const label = cartItemsLength > 10 ? "10+" : cartItemsLength;
+  const label =
+    cartItemsLength === 0
+      ? null
+      : cartItemsLength > 10
+        ? "10+"
+        : cartItemsLength;
 
   return (
     <TouchableOpacity
@@ -21,9 +26,11 @@ export default function CartIcon() {
         color={"#000"}
         style={styles.icon}
       />
-      <View style={styles.labelWrapper}>
-        <Text style={styles.label}>{label}</Text>
-      </View>
+      {label && (
+        <View style={styles.labelWrapper}>
+          <Text style={styles.label}>{label}</Text>
+        </View>
+      )}
     </TouchableOpacity>
   );
 }
