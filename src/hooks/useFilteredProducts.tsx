@@ -6,7 +6,11 @@ export default function useFilteredProducts(searchKeyword: string) {
   const [products, setProducts] = useState(() => data);
 
   useEffect(() => {
-    if (!searchKeyword) return;
+    // no value in the search bar
+    if (!searchKeyword) {
+      setProducts(data);
+      return;
+    }
 
     setProducts(
       products.filter((i) =>

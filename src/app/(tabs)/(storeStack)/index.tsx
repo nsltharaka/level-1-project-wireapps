@@ -17,8 +17,7 @@ export default function StoreScreen() {
             headerIconColor: "#000",
             onCancelButtonPress: () => setSearchKeyword(""),
             onClose: () => setSearchKeyword(""),
-            onSearchButtonPress: ({ nativeEvent: { text } }) =>
-              setSearchKeyword(text),
+            onChangeText: ({ nativeEvent: { text } }) => setSearchKeyword(text),
           },
         }}
       />
