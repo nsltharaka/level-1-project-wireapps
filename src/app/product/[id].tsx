@@ -1,6 +1,6 @@
 import AddToCartButton from "@/components/AddToCartButton";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
-import useCartContext from "@/hooks/useCartContext";
+import { useCartContext } from "@/contexts/CartContext";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";

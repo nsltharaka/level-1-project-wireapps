@@ -1,6 +1,7 @@
 import type { CartItem } from "@/types/cartItem";
 import React, {
   createContext,
+  useContext,
   useReducer,
   type PropsWithChildren,
 } from "react";
@@ -25,6 +26,16 @@ export default function CartContextProvider({ children }: PropsWithChildren) {
     </CartContext.Provider>
   );
 }
+
+// custom hook to use cart context
+export const useCartContext = () => {
+  const contextValue = useContext(CartContext);
+  if (!contextValue) {
+    throw new Error("component must be wrapped inside CartContextProvider");
+  }
+
+  return contextValue;
+};
 
 type State = {
   cartItems: CartItem[];
