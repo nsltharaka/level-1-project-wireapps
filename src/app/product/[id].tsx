@@ -1,7 +1,7 @@
 import AddToCartButton from "@/components/AddToCartButton";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import useCartContext from "@/hooks/useCartContext";
-import useProductContext from "@/hooks/useShopContext";
+import useFilteredProducts from "@/hooks/useFilteredProducts";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text } from "react-native";
@@ -9,7 +9,7 @@ import { Image, StyleSheet, Text } from "react-native";
 export default function ProductDetailsScreen() {
   const params = useLocalSearchParams<{ id: string }>();
 
-  const { products } = useProductContext();
+  const { products } = useFilteredProducts();
   const [_, dispatch] = useCartContext();
   const router = useRouter();
 

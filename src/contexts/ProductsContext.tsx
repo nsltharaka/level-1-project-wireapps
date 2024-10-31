@@ -11,7 +11,7 @@ export const ProductContext = createContext<ShopContextType | null>(null);
 export default function ProductContextProvider({
   children,
 }: PropsWithChildren) {
-  const [products] = useState(() => data);
+  const [products, setProducts] = useState(() => data);
 
   return (
     <ProductContext.Provider value={{ products }}>
