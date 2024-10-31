@@ -11,7 +11,10 @@ export default function ProductsList() {
   const onPressItem = (itemId: string) => router.push(`/product/${itemId}`);
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView
+      contentInsetAdjustmentBehavior="automatic"
+      contentContainerStyle={styles.container}
+    >
       {products.map((product: Product) => (
         <ProductCard
           key={product.id}

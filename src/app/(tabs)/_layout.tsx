@@ -19,8 +19,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="store"
+        name="(storeStack)"
         options={{
+          headerShown: false,
           title: "Store",
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="storefront" color={color} size={size} />
