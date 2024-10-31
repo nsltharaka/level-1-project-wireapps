@@ -1,3 +1,4 @@
+import CartIcon from "@/components/cart/CartIcon";
 import CartContextProvider from "@/contexts/CartContext";
 import ProductContextProvider from "@/contexts/ProductsContext";
 import { Stack } from "expo-router";
@@ -21,7 +22,7 @@ function RootStack() {
       />
       <Stack.Screen
         name="product/[id]"
-        options={{ title: "Product Details" }}
+        options={{ title: "Product Details", headerRight: () => <CartIcon /> }}
       />
       <Stack.Screen
         name="(modals)/cart"

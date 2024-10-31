@@ -12,12 +12,19 @@ export default function Cart() {
     </View>
   );
 
+  const EmptyComponent = () => (
+    <View style={styles.emptyComponent}>
+      <Text>Your cart is empty.</Text>
+    </View>
+  );
+
   return (
     <FlatList
       data={cart.cartItems}
       contentContainerStyle={styles.ContentContainer}
       renderItem={({ item }) => <CartItemCard item={item} />}
       ListFooterComponent={FooterComponent}
+      ListEmptyComponent={EmptyComponent}
     />
   );
 }
@@ -36,4 +43,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignSelf: "flex-end",
   },
+  emptyComponent: {},
 });
