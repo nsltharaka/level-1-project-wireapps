@@ -15,12 +15,6 @@ export default function StoreStack() {
           headerLargeStyle: {
             backgroundColor: IOS_DEFAULT_BACKGROUND_COLOR,
           },
-          headerSearchBarOptions: {
-            headerIconColor: "#000",
-            onSearchButtonPress: ({ nativeEvent: { text } }) => {
-              console.log(text);
-            },
-          },
           headerRight: () => <CartIcon />,
         }}
       />

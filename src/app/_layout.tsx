@@ -1,15 +1,12 @@
 import CartIcon from "@/components/cart/CartIcon";
 import CartContextProvider from "@/contexts/CartContext";
-import ProductContextProvider from "@/contexts/ProductsContext";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
   return (
-    <ProductContextProvider>
-      <CartContextProvider>
-        <RootStack />
-      </CartContextProvider>
-    </ProductContextProvider>
+    <CartContextProvider>
+      <RootStack />
+    </CartContextProvider>
   );
 }
 
