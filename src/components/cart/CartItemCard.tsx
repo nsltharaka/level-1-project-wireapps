@@ -1,5 +1,5 @@
 import { defaultStyles } from "@/constants/defaultStyles";
-import { useCartContext } from "@/contexts/CartContext";
+import { useCartContext } from "@/contexts/cartContext/CartContext";
 import type { CartItem } from "@/types/cartItem";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";

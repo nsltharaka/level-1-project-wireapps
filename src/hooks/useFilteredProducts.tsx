@@ -1,18 +1,18 @@
+import { useProductContext } from "@/contexts/ProductContext";
 import { useEffect, useState } from "react";
 
-import data from "@/data/sample.json";
-
 export default function useFilteredProducts(searchKeyword: string) {
-  const [products, setProducts] = useState(() => data);
+  const { products } = useProductContext();
+  const [filteredProducts, setFilteredProducts] = useState(() => products);
 
   useEffect(() => {
     // no value in the search bar
     if (!searchKeyword) {
-      setProducts(data);
+      setFilteredProducts(products);
       return;
     }
 
-    setProducts(
+    setFilteredProducts(
       products.filter((i) =>
         i.name.toLowerCase().includes(searchKeyword.toLowerCase()),
       ),
@@ -20,6 +20,6 @@ export default function useFilteredProducts(searchKeyword: string) {
   }, [searchKeyword]);
 
   return {
-    products,
+    filteredProducts,
   };
 }

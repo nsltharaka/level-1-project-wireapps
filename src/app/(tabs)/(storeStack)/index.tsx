@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StoreScreen() {
   const [searchKeyword, setSearchKeyword] = useState<string>("");
-  const { products } = useFilteredProducts(searchKeyword);
+  const { filteredProducts } = useFilteredProducts(searchKeyword);
 
   return (
     <SafeAreaView style={styles.container} edges={["left", "right"]}>
@@ -21,7 +21,7 @@ export default function StoreScreen() {
           },
         }}
       />
-      <ProductsList products={products} />
+      <ProductsList products={filteredProducts} />
     </SafeAreaView>
   );
 }

@@ -1,5 +1,5 @@
 import CartItemCard from "@/components/cart/CartItemCard";
-import { useCartContext } from "@/contexts/CartContext";
+import { useCartContext } from "@/contexts/cartContext/CartContext";
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
