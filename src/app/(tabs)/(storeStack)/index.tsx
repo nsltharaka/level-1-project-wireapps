@@ -3,15 +3,18 @@ import useFilteredProducts, {
   defaultFilters,
 } from "@/hooks/useFilteredProducts";
 import { Stack } from "expo-router";
-import React, { useState } from "react";
+import React from "react";
 import { Button, ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StoreScreen() {
-  const [searchKeyword, setSearchKeyword] = useState<string>("");
-
-  const { filteredProducts, addFilter, removeFilter, clearAllFilters } =
-    useFilteredProducts(searchKeyword);
+  const {
+    filteredProducts,
+    setSearchKeyword,
+    addFilter,
+    removeFilter,
+    clearAllFilters,
+  } = useFilteredProducts();
 
   return (
     <SafeAreaView style={styles.container} edges={["left", "right"]}>
@@ -36,7 +39,7 @@ export default function StoreScreen() {
           <Button
             title="add color filter"
             onPress={() =>
-              addFilter("withColor", defaultFilters.withColor("Black"))
+              addFilter("withColor", defaultFilters.withColor("black"))
             }
           />
           <Button
