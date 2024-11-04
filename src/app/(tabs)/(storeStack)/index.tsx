@@ -1,12 +1,14 @@
+import BottomSheet from "@/components/storeScreen/BottomSheet";
 import ListOptionButton from "@/components/storeScreen/ListOptionButton";
 import ProductsList from "@/components/storeScreen/ProductsList";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
 import { Stack } from "expo-router";
-import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StoreScreen() {
+  const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
   const {
     filteredProducts,
     setSearchKeyword,
@@ -28,8 +30,12 @@ export default function StoreScreen() {
         }}
       />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View style={{ flexDirection: "row", gap: 10 }}>
-          <ListOptionButton icon="filter" label="Filters" onPress={() => {}} />
+        <View style={styles.listOptionsContainer}>
+          <ListOptionButton
+            icon="filter"
+            label="Filters"
+            onPress={() => setBottomSheetVisible(true)}
+          />
           <ListOptionButton
             icon="chevron-expand-outline"
             iconSize={16}
@@ -42,6 +48,14 @@ export default function StoreScreen() {
           <ProductsList products={filteredProducts} />
         </View>
       </ScrollView>
+      <BottomSheet
+        isVisible={isBottomSheetVisible}
+        onCloseButtonPress={() => setBottomSheetVisible(false)}
+      >
+        <View>
+          <Text>hello</Text>
+        </View>
+      </BottomSheet>
     </SafeAreaView>
   );
 }
@@ -50,6 +64,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 10,
+  },
+  listOptionsContainer: {
+    flexDirection: "row",
+    gap: 10,
+    marginTop: 10,
   },
   listContainer: {
     flexDirection: "row",
