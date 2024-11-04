@@ -4,10 +4,9 @@ import { useCallback, useEffect, useState } from "react";
 
 export type Predicate = (item: Product) => boolean;
 
-export default function useFilteredProducts() {
+export default function useFilteredProducts(searchKeyword: string) {
   const { products } = useProductContext();
   const [filteredProducts, setFilteredProducts] = useState(() => products);
-  const [searchKeyword, setSearchKeyword] = useState<string>("");
   const [filters, setFilters] = useState<Map<string, Predicate>>(new Map());
 
   const addFilter = useCallback(
@@ -37,28 +36,26 @@ export default function useFilteredProducts() {
   }, []);
 
   useEffect(() => {
-    if (!searchKeyword) return;
-    addFilter(
-      "withSearchKeyword",
-      defaultFilters.withSearchKeyword(searchKeyword),
-    );
-
-    return () => removeFilter("withSearchKeyword");
+    if (searchKeyword) {
+      addFilter(
+        "withSearchKeyword",
+        defaultFilters.withSearchKeyword(searchKeyword),
+      );
+    } else {
+      removeFilter("withSearchKeyword");
+    }
   }, [searchKeyword]);
 
   useEffect(() => {
-    if (filters.size === 0) {
-      setFilteredProducts(products);
-      return;
-    }
     setFilteredProducts(
-      products.filter(buildFilterFunction(...filters.values())),
+      filters.size === 0
+        ? products
+        : products.filter(buildFilterFunction(...filters.values())),
     );
-  }, [filters.size, searchKeyword]);
+  }, [filters, products]);
 
   return {
     filteredProducts,
-    setSearchKeyword,
     addFilter,
     removeFilter,
     clearAllFilters,
@@ -66,33 +63,22 @@ export default function useFilteredProducts() {
 }
 
 const buildFilterFunction = (...filters: Predicate[]) => {
-  if (filters.length === 0) return () => true;
-  return filters.reduce(
-    (predicateA, predicateB) => {
-      return (item) => predicateA(item) && predicateB(item);
-    },
-    () => true,
-  );
+  return (item: Product) => filters.every((predicate) => predicate(item));
 };
 
 export const defaultFilters = {
   withSearchKeyword: (key: string) => (item: Product) => {
-    if (!key) return true;
-    return item.name
-      .toLowerCase()
-      .concat(" ", item.description.toLowerCase(), " ", item.colour, " ")
-      .includes(key.toLowerCase());
+    const lowerKey = key.toLowerCase();
+    const searchableText = `${item.name.toLowerCase()} ${item.description.toLowerCase()} ${item.colour}`;
+    return searchableText.includes(lowerKey);
   },
 
   withBrand: (brandName: string) => (item: Product) => {
-    if (brandName === "any") return true;
-    const itemBrand = item.name.substring(0, item.name.indexOf(" "));
+    const itemBrand = item.name.split(" ")[0];
     return itemBrand.toLowerCase() === brandName.toLowerCase();
   },
 
-  withColor: (colorName: string) => {
-    if (colorName === "any") return () => true;
-    return (item: Product) =>
-      item.colour.toLowerCase() === colorName.toLowerCase();
+  withColor: (colorName: string) => (item: Product) => {
+    return item.colour.toLowerCase() === colorName.toLowerCase();
   },
 };

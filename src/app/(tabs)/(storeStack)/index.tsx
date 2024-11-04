@@ -8,14 +8,10 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StoreScreen() {
+  const [searchKeyword, setSearchKeyword] = useState("");
   const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
-  const {
-    filteredProducts,
-    setSearchKeyword,
-    addFilter,
-    removeFilter,
-    clearAllFilters,
-  } = useFilteredProducts();
+  const { filteredProducts, addFilter, removeFilter, clearAllFilters } =
+    useFilteredProducts(searchKeyword);
 
   return (
     <SafeAreaView style={styles.container} edges={["left", "right"]}>
