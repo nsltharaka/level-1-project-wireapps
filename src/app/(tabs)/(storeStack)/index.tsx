@@ -1,10 +1,9 @@
+import ListOptionButton from "@/components/storeScreen/ListOptionButton";
 import ProductsList from "@/components/storeScreen/ProductsList";
-import useFilteredProducts, {
-  defaultFilters,
-} from "@/hooks/useFilteredProducts";
+import useFilteredProducts from "@/hooks/useFilteredProducts";
 import { Stack } from "expo-router";
 import React from "react";
-import { Button, ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StoreScreen() {
@@ -29,24 +28,14 @@ export default function StoreScreen() {
         }}
       />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View>
-          <Button
-            title="add brand filter"
-            onPress={() =>
-              addFilter("withBrand", defaultFilters.withBrand("Nike"))
-            }
+        <View style={{ flexDirection: "row", gap: 10 }}>
+          <ListOptionButton icon="filter" label="Filters" onPress={() => {}} />
+          <ListOptionButton
+            icon="chevron-expand-outline"
+            iconSize={16}
+            label={`Sort by: ${"price low to high"}`}
+            onPress={() => {}}
           />
-          <Button
-            title="add color filter"
-            onPress={() =>
-              addFilter("withColor", defaultFilters.withColor("black"))
-            }
-          />
-          <Button
-            title="remove brand filter"
-            onPress={() => removeFilter("withBrand")}
-          />
-          <Button title="clear all filters" onPress={() => clearAllFilters()} />
         </View>
 
         <View style={styles.listContainer}>
@@ -60,11 +49,12 @@ export default function StoreScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: 10,
   },
   listContainer: {
-    padding: 10,
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 10,
+    marginVertical: 10,
   },
 });
