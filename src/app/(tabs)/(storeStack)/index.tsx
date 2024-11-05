@@ -1,4 +1,4 @@
-import BottomSheet from "@/components/storeScreen/BottomSheet";
+import BottomSheet from "@/components/BottomSheet";
 import ListOptionButton from "@/components/storeScreen/ListOptionButton";
 import ProductsList from "@/components/storeScreen/ProductsList";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
