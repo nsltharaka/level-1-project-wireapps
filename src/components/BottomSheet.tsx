@@ -1,8 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { type PropsWithChildren } from "react";
-import { Modal, StyleSheet, View } from "react-native";
+import { Modal, StyleSheet, Text, View } from "react-native";
 
-type Props = PropsWithChildren & {
+export type Props = PropsWithChildren & {
   isVisible: boolean;
   onCloseButtonPress: () => void;
   height?: `${number}%`;
@@ -18,6 +18,7 @@ export default function BottomSheet({
     <Modal animationType={"slide"} visible={isVisible} transparent={true}>
       <View style={[styles.container, height && { height: height }]}>
         <View style={styles.titleContainer}>
+          <Text style={styles.title}>Filters</Text>
           <Ionicons
             name="close-outline"
             color={"grey"}
@@ -40,7 +41,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderTopRightRadius: 18,
     borderTopLeftRadius: 18,
-    paddingTop: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -52,11 +52,15 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flexDirection: "row",
-    justifyContent: "flex-end",
-    paddingHorizontal: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: "grey",
   },
-  content: {
-    backgroundColor: "lightgreen",
-    paddingHorizontal: 10,
+  title: {
+    fontWeight: "bold",
+    fontSize: 16,
   },
 });

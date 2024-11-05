@@ -1,15 +1,16 @@
-import BottomSheet from "@/components/BottomSheet";
+import FilterBottomSheet from "@/components/storeScreen/FilterBottomSheet";
 import ListOptionButton from "@/components/storeScreen/ListOptionButton";
 import ProductsList from "@/components/storeScreen/ProductsList";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
 import { Stack } from "expo-router";
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StoreScreen() {
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [isBottomSheetVisible, setBottomSheetVisible] = useState(false);
+  const [isFilterBottomSheetVisible, setFilterBottomSheetVisible] =
+    useState(false);
   const { filteredProducts, addFilter, removeFilter, clearAllFilters } =
     useFilteredProducts(searchKeyword);
 
@@ -30,7 +31,7 @@ export default function StoreScreen() {
           <ListOptionButton
             icon="filter"
             label="Filters"
-            onPress={() => setBottomSheetVisible(true)}
+            onPress={() => setFilterBottomSheetVisible(true)}
           />
           <ListOptionButton
             icon="chevron-expand-outline"
@@ -44,14 +45,11 @@ export default function StoreScreen() {
           <ProductsList products={filteredProducts} />
         </View>
       </ScrollView>
-      <BottomSheet
-        isVisible={isBottomSheetVisible}
-        onCloseButtonPress={() => setBottomSheetVisible(false)}
-      >
-        <View>
-          <Text>hello</Text>
-        </View>
-      </BottomSheet>
+
+      <FilterBottomSheet
+        isVisible={isFilterBottomSheetVisible}
+        onCloseButtonPress={() => setFilterBottomSheetVisible(false)}
+      />
     </SafeAreaView>
   );
 }
