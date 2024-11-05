@@ -7,7 +7,9 @@ export type Predicate = (item: Product) => boolean;
 export default function useFilteredProducts(searchKeyword: string) {
   const { products } = useProductContext();
   const [filteredProducts, setFilteredProducts] = useState(() => products);
-  const [filters, setFilters] = useState<Map<string, Predicate>>(new Map());
+  const [filters, setFilters] = useState<
+    Map<keyof typeof defaultFilters, Predicate>
+  >(new Map());
 
   const addFilter = useCallback(
     (filterName: keyof typeof defaultFilters, filter: Predicate) => {

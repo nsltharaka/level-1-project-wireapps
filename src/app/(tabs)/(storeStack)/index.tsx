@@ -1,7 +1,9 @@
-import FilterBottomSheet from "@/components/storeScreen/FilterBottomSheet";
+import FilterBottomSheet from "@/components/bottomSheets/filter/FilterBottomSheet";
+import SortBottomSheet from "@/components/bottomSheets/sort/SortBottomSheet";
 import ListOptionButton from "@/components/storeScreen/ListOptionButton";
 import ProductsList from "@/components/storeScreen/ProductsList";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
+import useSortedProducts from "@/hooks/useSortedProducts";
 import { Stack } from "expo-router";
 import React, { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
@@ -11,8 +13,12 @@ export default function StoreScreen() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [isFilterBottomSheetVisible, setFilterBottomSheetVisible] =
     useState(false);
+  const [isSortBottomSheetVisible, setSortBottomSheetVisible] = useState(false);
   const { filteredProducts, addFilter, removeFilter, clearAllFilters } =
     useFilteredProducts(searchKeyword);
+
+  const { products, activeMapper, setActiveMapper } =
+    useSortedProducts(filteredProducts);
 
   return (
     <SafeAreaView style={styles.container} edges={["left", "right"]}>
@@ -36,19 +42,29 @@ export default function StoreScreen() {
           <ListOptionButton
             icon="chevron-expand-outline"
             iconSize={16}
-            label={`Sort by: ${"price low to high"}`}
-            onPress={() => {}}
+            label={`Sort by: ${activeMapper}`}
+            onPress={() => setSortBottomSheetVisible(true)}
           />
         </View>
 
         <View style={styles.listContainer}>
-          <ProductsList products={filteredProducts} />
+          <ProductsList products={products} />
         </View>
       </ScrollView>
 
       <FilterBottomSheet
+        title="Filters"
         isVisible={isFilterBottomSheetVisible}
         onCloseButtonPress={() => setFilterBottomSheetVisible(false)}
+      />
+
+      <SortBottomSheet
+        isVisible={isSortBottomSheetVisible}
+        onMapperSelect={(mapperName: typeof activeMapper) => {
+          setActiveMapper(mapperName);
+          setSortBottomSheetVisible(false);
+        }}
+        onCloseButtonPress={() => setSortBottomSheetVisible(false)}
       />
     </SafeAreaView>
   );

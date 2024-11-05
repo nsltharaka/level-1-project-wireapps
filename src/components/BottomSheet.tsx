@@ -6,11 +6,13 @@ export type Props = PropsWithChildren & {
   isVisible: boolean;
   onCloseButtonPress: () => void;
   height?: `${number}%`;
+  title?: string;
 };
 
 export default function BottomSheet({
   isVisible,
   height,
+  title,
   children,
   onCloseButtonPress,
 }: Props) {
@@ -18,7 +20,7 @@ export default function BottomSheet({
     <Modal animationType={"slide"} visible={isVisible} transparent={true}>
       <View style={[styles.container, height && { height: height }]}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Filters</Text>
+          <Text style={styles.title}>{title || ""}</Text>
           <Ionicons
             name="close-outline"
             color={"grey"}

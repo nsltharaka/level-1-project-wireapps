@@ -1,17 +1,24 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import BottomSheet, { type Props } from "../BottomSheet";
+import BottomSheet, { type Props } from "../../BottomSheet";
 
 type FilterBottomSheetProps = Props & {};
 
 export default function FilterBottomSheet({
   isVisible,
+  title,
   onCloseButtonPress,
 }: FilterBottomSheetProps) {
   return (
-    <BottomSheet isVisible={isVisible} onCloseButtonPress={onCloseButtonPress}>
+    <BottomSheet
+      isVisible={isVisible}
+      title={title}
+      onCloseButtonPress={onCloseButtonPress}
+    >
       <View style={styles.container}>
-        <Text>FilterBottomSheet</Text>
+        <View>
+          <Text>Brand:</Text>
+        </View>
       </View>
     </BottomSheet>
   );
@@ -19,6 +26,6 @@ export default function FilterBottomSheet({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "lightgreen",
+    padding: 20,
   },
 });
