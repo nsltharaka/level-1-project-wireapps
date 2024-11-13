@@ -28,9 +28,8 @@ const buildFilterFunction = (...filters: Predicate[]) => {
 export const defaultFilters = {
   withSearchKeyword: (key: string) => (item: Product) => {
     if (!key) return true;
-    const lowerKey = key.toLowerCase();
     const searchableText = `${item.name.toLowerCase()} ${item.description.toLowerCase()} ${item.colour}`;
-    return searchableText.includes(lowerKey);
+    return searchableText.includes(key.toLowerCase());
   },
 
   withBrand: (brandName: string) => (item: Product) => {
