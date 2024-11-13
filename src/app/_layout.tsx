@@ -1,13 +1,16 @@
 import CartIcon from "@/components/cart/CartIcon";
 import CartContextProvider from "@/contexts/cartContext/CartContext";
 import ProductContextProvider from "@/contexts/ProductContext";
+import ProductListContextProvider from "@/contexts/productList/ProductListContext";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
   return (
     <ProductContextProvider>
       <CartContextProvider>
-        <RootStack />
+        <ProductListContextProvider>
+          <RootStack />
+        </ProductListContextProvider>
       </CartContextProvider>
     </ProductContextProvider>
   );
@@ -27,6 +30,24 @@ function RootStack() {
       <Stack.Screen
         name="(modals)/cart"
         options={{ title: "Cart", presentation: "modal" }}
+      />
+      <Stack.Screen
+        name="(modals)/filterBottomSheet"
+        options={{
+          headerSearchBarOptions: {},
+          presentation: "transparentModal",
+          headerShown: false,
+          animation: "fade",
+        }}
+      />
+      <Stack.Screen
+        name="(modals)/sortBottomSheet"
+        options={{
+          headerSearchBarOptions: {},
+          presentation: "transparentModal",
+          headerShown: false,
+          animation: "fade",
+        }}
       />
     </Stack>
   );
