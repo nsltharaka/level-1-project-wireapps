@@ -1,4 +1,4 @@
-import SelectableOption from "@/components/bottomSheets/filter/SelectableText";
+import SelectableOption from "@/components/bottomSheets/filter/SelectableOption";
 import { IOS_DEFAULT_BACKGROUND_COLOR } from "@/constants/defaultStyles";
 import {
   brands,
