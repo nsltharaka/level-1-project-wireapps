@@ -1,24 +1,19 @@
-import FilterBottomSheet from "@/components/bottomSheets/filter/FilterBottomSheet";
-import SortBottomSheet from "@/components/bottomSheets/sort/SortBottomSheet";
 import ListOptionButton from "@/components/storeScreen/ListOptionButton";
 import ProductsList from "@/components/storeScreen/ProductsList";
+import { useProductListContext } from "@/contexts/productList/ProductListContext";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
 import useSortedProducts from "@/hooks/useSortedProducts";
-import { Stack } from "expo-router";
-import React, { useState } from "react";
+import { router, Stack } from "expo-router";
+import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StoreScreen() {
-  const [searchKeyword, setSearchKeyword] = useState("");
-  const [isFilterBottomSheetVisible, setFilterBottomSheetVisible] =
-    useState(false);
-  const [isSortBottomSheetVisible, setSortBottomSheetVisible] = useState(false);
-  const { filteredProducts, addFilter, removeFilter, clearAllFilters } =
-    useFilteredProducts(searchKeyword);
+  const { setSearchKeyword } = useProductListContext();
+  const { filteredProducts } = useFilteredProducts();
+  const { products, activeMapper } = useSortedProducts(filteredProducts);
 
-  const { products, activeMapper, setActiveMapper } =
-    useSortedProducts(filteredProducts);
+  console.log("re rendering");
 
   return (
     <SafeAreaView style={styles.container} edges={["left", "right"]}>
@@ -37,13 +32,13 @@ export default function StoreScreen() {
           <ListOptionButton
             icon="filter"
             label="Filters"
-            onPress={() => setFilterBottomSheetVisible(true)}
+            onPress={() => router.push("/(modals)/filterBottomSheet")}
           />
           <ListOptionButton
             icon="chevron-expand-outline"
             iconSize={16}
             label={`Sort by: ${activeMapper}`}
-            onPress={() => setSortBottomSheetVisible(true)}
+            onPress={() => router.push("/(modals)/sortBottomSheet")}
           />
         </View>
 
@@ -51,21 +46,6 @@ export default function StoreScreen() {
           <ProductsList products={products} />
         </View>
       </ScrollView>
-
-      <FilterBottomSheet
-        title="Filters"
-        isVisible={isFilterBottomSheetVisible}
-        onCloseButtonPress={() => setFilterBottomSheetVisible(false)}
-      />
-
-      <SortBottomSheet
-        isVisible={isSortBottomSheetVisible}
-        onMapperSelect={(mapperName: typeof activeMapper) => {
-          setActiveMapper(mapperName);
-          setSortBottomSheetVisible(false);
-        }}
-        onCloseButtonPress={() => setSortBottomSheetVisible(false)}
-      />
     </SafeAreaView>
   );
 }
