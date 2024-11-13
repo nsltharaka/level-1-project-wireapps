@@ -1,6 +1,6 @@
 import ListOptionButton from "@/components/storeScreen/ListOptionButton";
 import ProductsList from "@/components/storeScreen/ProductsList";
-import { useProductListContext } from "@/contexts/productList/ProductListContext";
+import useDebounceSearch from "@/hooks/useDebounceSearch";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
 import useSortedProducts from "@/hooks/useSortedProducts";
 import { router, Stack } from "expo-router";
@@ -9,11 +9,9 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StoreScreen() {
-  const { setSearchKeyword } = useProductListContext();
+  const { setSearchKeywordWithDebounce } = useDebounceSearch();
   const { filteredProducts } = useFilteredProducts();
   const { products, activeMapper } = useSortedProducts(filteredProducts);
-
-  console.log("re rendering");
 
   return (
     <SafeAreaView style={styles.container} edges={["left", "right"]}>
@@ -21,9 +19,10 @@ export default function StoreScreen() {
         options={{
           headerSearchBarOptions: {
             headerIconColor: "#000",
-            onCancelButtonPress: () => setSearchKeyword(""), // for ios
-            onClose: () => setSearchKeyword(""), // for android
-            onChangeText: ({ nativeEvent: { text } }) => setSearchKeyword(text),
+            onCancelButtonPress: () => setSearchKeywordWithDebounce(""), // for ios
+            onClose: () => setSearchKeywordWithDebounce(""), // for android
+            onChangeText: ({ nativeEvent: { text } }) =>
+              setSearchKeywordWithDebounce(text),
           },
         }}
       />
