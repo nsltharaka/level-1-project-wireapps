@@ -7,7 +7,7 @@ import {
 } from "@/contexts/productList/ProductListContext";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -26,10 +26,23 @@ export default function FilterBottomSheet() {
     setSelectedPriceRange,
   } = useProductListContext();
 
+  const [brand, setBrand] = useState<typeof selectedBrand>(selectedBrand);
+  const [color, setColor] = useState<typeof selectedColor>(selectedColor);
+  const [priceRange, setPriceRange] =
+    useState<typeof selectedPriceRange>(selectedPriceRange);
+
   const onApply = () => {
+    setSelectedBrand(brand);
+    setSelectedColor(color);
+    setSelectedPriceRange(priceRange);
     router.back();
   };
-  const onClear = () => {};
+  const onClear = () => {
+    setSelectedBrand("any");
+    setSelectedColor("any");
+    setSelectedPriceRange([0, 0]);
+    router.back();
+  };
 
   return (
     <View style={styles.modalContainer}>
@@ -51,8 +64,8 @@ export default function FilterBottomSheet() {
               {brands.map((brandName, index) => (
                 <SelectableOption
                   key={index}
-                  selected={selectedBrand === brandName}
-                  onPress={() => setSelectedBrand(brandName)}
+                  selected={brand === brandName}
+                  onPress={() => setBrand(brandName)}
                 >
                   {brandName}
                 </SelectableOption>
@@ -63,8 +76,8 @@ export default function FilterBottomSheet() {
               {colors.map((colorName, index) => (
                 <SelectableOption
                   key={index}
-                  selected={selectedColor === colorName}
-                  onPress={() => setSelectedColor(colorName)}
+                  selected={color === colorName}
+                  onPress={() => setColor(colorName)}
                 >
                   {colorName}
                 </SelectableOption>
@@ -79,10 +92,7 @@ export default function FilterBottomSheet() {
                   defaultValue={selectedPriceRange[0].toString()}
                   selectTextOnFocus
                   onChangeText={(text) =>
-                    setSelectedPriceRange((prev) => [
-                      Number.parseFloat(text),
-                      prev[1],
-                    ])
+                    setPriceRange((prev) => [Number.parseFloat(text), prev[1]])
                   }
                   style={styles.optionTextInput}
                 />
@@ -92,10 +102,7 @@ export default function FilterBottomSheet() {
                   defaultValue={selectedPriceRange[1].toString()}
                   selectTextOnFocus
                   onChangeText={(text) =>
-                    setSelectedPriceRange((prev) => [
-                      prev[0],
-                      Number.parseFloat(text),
-                    ])
+                    setPriceRange((prev) => [prev[0], Number.parseFloat(text)])
                   }
                   style={styles.optionTextInput}
                 />

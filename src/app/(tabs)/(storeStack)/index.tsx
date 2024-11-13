@@ -1,16 +1,19 @@
 import ListOptionButton from "@/components/storeScreen/ListOptionButton";
 import ProductsList from "@/components/storeScreen/ProductsList";
+import { useProductListContext } from "@/contexts/productList/ProductListContext";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
 import useSortedProducts from "@/hooks/useSortedProducts";
 import { router, Stack } from "expo-router";
-import React, { useState } from "react";
+import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StoreScreen() {
-  const [searchKeyword, setSearchKeyword] = useState("");
-  const { filteredProducts } = useFilteredProducts(searchKeyword);
+  const { setSearchKeyword } = useProductListContext();
+  const { filteredProducts } = useFilteredProducts();
   const { products, activeMapper } = useSortedProducts(filteredProducts);
+
+  console.log("re rendering");
 
   return (
     <SafeAreaView style={styles.container} edges={["left", "right"]}>

@@ -10,6 +10,8 @@ export const brands = ["any", "Nike", "Puma"] as const;
 export const colors = ["any", "Blue", "Black"] as const;
 
 export const ProductListContext = createContext<{
+  searchKeyword: string;
+  setSearchKeyword: React.Dispatch<React.SetStateAction<string>>;
   selectedBrand: (typeof brands)[number];
   setSelectedBrand: React.Dispatch<
     React.SetStateAction<(typeof brands)[number]>
@@ -27,6 +29,7 @@ export const ProductListContext = createContext<{
 export default function ProductListContextProvider({
   children,
 }: PropsWithChildren) {
+  const [searchKeyword, setSearchKeyword] = useState("");
   const [selectedBrand, setSelectedBrand] =
     useState<(typeof brands)[number]>("any");
   const [selectedColor, setSelectedColor] =
@@ -40,6 +43,8 @@ export default function ProductListContextProvider({
   return (
     <ProductListContext.Provider
       value={{
+        searchKeyword,
+        setSearchKeyword,
         selectedBrand,
         setSelectedBrand,
         selectedColor,

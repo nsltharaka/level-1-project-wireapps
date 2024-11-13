@@ -1,70 +1,23 @@
 import { useProductContext } from "@/contexts/ProductContext";
+import { useProductListContext } from "@/contexts/productList/ProductListContext";
 import type { Product } from "@/types/product";
-import { useCallback, useEffect, useState } from "react";
 
 export type Predicate = (item: Product) => boolean;
 
-export default function useFilteredProducts(searchKeyword: string) {
+export default function useFilteredProducts() {
   const { products } = useProductContext();
-  const [filteredProducts, setFilteredProducts] = useState(() => products);
-  const [filters, setFilters] = useState<
-    Map<keyof typeof defaultFilters, Predicate>
-  >(new Map());
+  const { selectedBrand, selectedColor, selectedPriceRange, searchKeyword } =
+    useProductListContext();
 
-  const addFilter = useCallback(
-    (filterName: keyof typeof defaultFilters, filter: Predicate) => {
-      setFilters((prevMap) => {
-        const newMap = new Map(prevMap);
-        newMap.set(filterName, filter);
-        return newMap;
-      });
-    },
-    [],
-  );
-
-  const removeFilter = useCallback(
-    (filterName: keyof typeof defaultFilters) => {
-      setFilters((prevMap) => {
-        const newMap = new Map(prevMap);
-        newMap.delete(filterName);
-        return newMap;
-      });
-    },
-    [],
-  );
-
-  const clearAllFilters = useCallback(() => {
-    setFilters(new Map());
-  }, []);
-
-  useEffect(() => {
-    if (!searchKeyword) {
-      removeFilter("withSearchKeyword");
-      return;
-    }
-
-    const timeout = setTimeout(() => {
-      addFilter(
-        "withSearchKeyword",
-        defaultFilters.withSearchKeyword(searchKeyword),
-      );
-    }, 500);
-    return () => clearInterval(timeout);
-  }, [searchKeyword]);
-
-  useEffect(() => {
-    setFilteredProducts(
-      filters.size === 0
-        ? products
-        : products.filter(buildFilterFunction(...filters.values())),
-    );
-  }, [filters, products]);
+  const filters = [
+    defaultFilters.withBrand(selectedBrand),
+    defaultFilters.withColor(selectedColor),
+    defaultFilters.withSearchKeyword(searchKeyword),
+    defaultFilters.withPriceRange(selectedPriceRange),
+  ];
 
   return {
-    filteredProducts,
-    addFilter,
-    removeFilter,
-    clearAllFilters,
+    filteredProducts: products.filter(buildFilterFunction(...filters)),
   };
 }
 
@@ -74,17 +27,26 @@ const buildFilterFunction = (...filters: Predicate[]) => {
 
 export const defaultFilters = {
   withSearchKeyword: (key: string) => (item: Product) => {
+    if (!key) return true;
     const lowerKey = key.toLowerCase();
     const searchableText = `${item.name.toLowerCase()} ${item.description.toLowerCase()} ${item.colour}`;
     return searchableText.includes(lowerKey);
   },
 
   withBrand: (brandName: string) => (item: Product) => {
+    if (brandName === "any") return true;
     const itemBrand = item.name.split(" ")[0];
     return itemBrand.toLowerCase() === brandName.toLowerCase();
   },
 
   withColor: (colorName: string) => (item: Product) => {
+    if (colorName === "any") return true;
     return item.colour.toLowerCase() === colorName.toLowerCase();
+  },
+
+  withPriceRange: (priceRange: [number, number]) => (item: Product) => {
+    if (priceRange[0] === 0 && priceRange[1] === 0) return true;
+    const itemPrice = parseFloat(item.price);
+    return itemPrice >= priceRange[0] && itemPrice <= priceRange[1];
   },
 };
