@@ -8,6 +8,7 @@ import {
 
 export const FavoritesContext = createContext<{
   favorites: Set<Product["id"]>;
+  isInFavorites: (id: Product["id"]) => boolean;
   addToFavorites: (id: Product["id"]) => void;
   removeFromFavorites: (id: Product["id"]) => void;
 } | null>(null);
@@ -23,14 +24,17 @@ export default function FavoritesContextProvider({
 
   const removeFromFavorites = (productId: Product["id"]) => {
     setFavorites(
-      (prev) => new Set([...prev.values().filter((id) => id !== productId)]),
+      (prev) => new Set([...prev.values()].filter((id) => id !== productId)),
     );
   };
+
+  const isInFavorites = (id: Product["id"]) => favorites.has(id);
 
   return (
     <FavoritesContext.Provider
       value={{
         favorites,
+        isInFavorites,
         addToFavorites,
         removeFromFavorites,
       }}
@@ -40,7 +44,7 @@ export default function FavoritesContextProvider({
   );
 }
 
-export function useProductContext() {
+export function useFavoritesContext() {
   const value = useContext(FavoritesContext);
   if (!value) {
     throw new Error(

@@ -1,8 +1,9 @@
 import ListOptionButton from "@/components/storeScreen/ListOptionButton";
-import ProductsList from "@/components/storeScreen/ProductsList";
+import ProductCard from "@/components/storeScreen/ProductCard";
 import useDebounceSearch from "@/hooks/useDebounceSearch";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
 import useSortedProducts from "@/hooks/useSortedProducts";
+import type { Product } from "@/types/product";
 import { router, Stack } from "expo-router";
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
@@ -42,7 +43,9 @@ export default function StoreScreen() {
         </View>
 
         <View style={styles.listContainer}>
-          <ProductsList products={products} />
+          {products.map((product: Product) => (
+            <ProductCard key={product.id} item={product} />
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -1,16 +1,17 @@
 import type { Product } from "@/types/product";
+import { router } from "expo-router";
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import FavoritesButton from "../FavoritesButton";
 
 type Props = {
   item: Product;
-  onPressHandleFunc: (itemId: string) => void;
 };
 
-export default function ProductCard({ item, onPressHandleFunc }: Props) {
+export default function ProductCard({ item }: Props) {
   return (
     <TouchableOpacity
-      onPress={() => onPressHandleFunc(item.id)}
+      onPress={() => router.push(`/product/${item.id}`)}
       style={styles.container}
     >
       <Image source={{ uri: item.mainImage }} style={styles.image} />
@@ -19,6 +20,7 @@ export default function ProductCard({ item, onPressHandleFunc }: Props) {
       </Text>
       <Text>{item.colour}</Text>
       <Text>$ {item.price}</Text>
+      <FavoritesButton style={styles.favoritesButton} forItem={item.id} />
     </TouchableOpacity>
   );
 }
@@ -48,5 +50,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     height: 40,
     marginBottom: 5,
+  },
+  favoritesButton: {
+    position: "absolute",
+    right: 5,
+    top: 5,
+    padding: 7,
   },
 });
