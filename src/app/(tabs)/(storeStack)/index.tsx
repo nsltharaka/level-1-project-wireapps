@@ -27,7 +27,10 @@ export default function StoreScreen() {
           },
         }}
       />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.listOptionsContainer}>
           <ListOptionButton
             icon="filter"
@@ -44,7 +47,13 @@ export default function StoreScreen() {
 
         <View style={styles.listContainer}>
           {products.map((product: Product) => (
-            <ProductCard key={product.id} item={product} />
+            <View style={styles.productCardContainer} key={product.id}>
+              <ProductCard item={product}>
+                <ProductCard.Color />
+                <ProductCard.Price />
+                <ProductCard.FavoriteButton />
+              </ProductCard>
+            </View>
           ))}
         </View>
       </ScrollView>
@@ -67,5 +76,8 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     gap: 10,
     marginVertical: 10,
+  },
+  productCardContainer: {
+    width: "48%",
   },
 });
