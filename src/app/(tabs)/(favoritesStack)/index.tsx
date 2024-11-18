@@ -21,7 +21,6 @@ export default function FavoritesScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      console.log("useEffect runs in favoriteStack/index");
       setEditMode(false);
     }, []),
   );

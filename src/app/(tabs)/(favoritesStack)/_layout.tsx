@@ -3,8 +3,6 @@ import { Stack } from "expo-router";
 import React from "react";
 
 export default function StoreStack() {
-  console.log("store stack re rendered");
-
   return (
     <Stack>
       <Stack.Screen
