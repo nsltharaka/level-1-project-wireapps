@@ -31,7 +31,7 @@ export default function FavoritesButton({ forItem: itemId, style }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
 });

@@ -3,14 +3,16 @@ import { Stack } from "expo-router";
 import React from "react";
 
 export default function StoreStack() {
+  console.log("store stack re rendered");
+
   return (
     <Stack>
       <Stack.Screen
         name="index"
         options={{
-          title: "Favorites",
-          headerShadowVisible: false,
           headerLargeTitle: true,
+          headerShadowVisible: false,
+          title: "Favorites",
           headerLargeStyle: {
             backgroundColor: IOS_DEFAULT_BACKGROUND_COLOR,
           },

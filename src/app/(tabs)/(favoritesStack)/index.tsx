@@ -21,6 +21,7 @@ export default function FavoritesScreen() {
 
   useFocusEffect(
     useCallback(() => {
+      console.log("useEffect runs in favoriteStack/index");
       setEditMode(false);
     }, []),
   );
@@ -38,8 +39,8 @@ export default function FavoritesScreen() {
         }}
       />
       <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}
+        contentInsetAdjustmentBehavior="automatic"
       >
         <View style={styles.listContainer}>
           {favoriteProducts.map((product) => (
@@ -63,21 +64,21 @@ export default function FavoritesScreen() {
 
 const styles = StyleSheet.create({
   listContainer: {
-    padding: 10,
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 12,
+    padding: 10,
   },
   closeButton: {
+    alignItems: "center",
     backgroundColor: "#fff",
-    padding: 3,
     borderRadius: 100,
     borderWidth: StyleSheet.hairlineWidth,
     justifyContent: "center",
-    alignItems: "center",
+    padding: 3,
     position: "absolute",
-    top: -7,
     right: -7,
+    top: -7,
   },
   productCardContainer: {
     width: "48%",

@@ -61,10 +61,10 @@ ProductCard.Price = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    borderRadius: 16,
-    padding: 10,
     backgroundColor: "#fff",
+    borderRadius: 16,
+    flex: 1,
+    padding: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -76,9 +76,9 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   image: {
-    width: "100%",
     height: 200,
     objectFit: "contain",
+    width: "100%",
   },
   itemName: {
     fontSize: 16,
@@ -87,9 +87,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   favoritesButton: {
+    padding: 7,
     position: "absolute",
     right: 5,
     top: 5,
-    padding: 7,
   },
 });
