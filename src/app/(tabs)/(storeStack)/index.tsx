@@ -74,12 +74,10 @@ const styles = StyleSheet.create({
   listOptionsContainer: {
     flexDirection: "row",
     gap: 10,
-    alignSelf: "flex-start",
-    marginBottom: 5,
   },
   contentContainer: {
     gap: 10,
-    paddingBottom: 10,
+    paddingVertical: 10,
   },
   columnWrapper: {
     gap: 10,
