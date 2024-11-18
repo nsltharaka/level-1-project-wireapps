@@ -1,24 +1,28 @@
-import FilterBottomSheet from "@/components/bottomSheets/filter/FilterBottomSheet";
-import SortBottomSheet from "@/components/bottomSheets/sort/SortBottomSheet";
 import ListOptionButton from "@/components/storeScreen/ListOptionButton";
-import ProductsList from "@/components/storeScreen/ProductsList";
+import ProductCard from "@/components/storeScreen/ProductCard";
+import useDebounceSearch from "@/hooks/useDebounceSearch";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
 import useSortedProducts from "@/hooks/useSortedProducts";
-import { Stack } from "expo-router";
-import React, { useState } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import type { Product } from "@/types/product";
+import { router, Stack } from "expo-router";
+import React from "react";
+import { FlatList, StyleSheet, View, type ListRenderItem } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StoreScreen() {
-  const [searchKeyword, setSearchKeyword] = useState("");
-  const [isFilterBottomSheetVisible, setFilterBottomSheetVisible] =
-    useState(false);
-  const [isSortBottomSheetVisible, setSortBottomSheetVisible] = useState(false);
-  const { filteredProducts, addFilter, removeFilter, clearAllFilters } =
-    useFilteredProducts(searchKeyword);
+  const { setSearchKeywordWithDebounce } = useDebounceSearch();
+  const { filteredProducts } = useFilteredProducts();
+  const { products, activeMapper } = useSortedProducts(filteredProducts);
 
-  const { products, activeMapper, setActiveMapper } =
-    useSortedProducts(filteredProducts);
+  const renderAsProducts: ListRenderItem<Product> = ({ item }) => (
+    <View style={styles.productCardContainer} key={item.id}>
+      <ProductCard item={item}>
+        <ProductCard.Color />
+        <ProductCard.Price />
+        <ProductCard.FavoriteButton />
+      </ProductCard>
+    </View>
+  );
 
   return (
     <SafeAreaView style={styles.container} edges={["left", "right"]}>
@@ -26,45 +30,37 @@ export default function StoreScreen() {
         options={{
           headerSearchBarOptions: {
             headerIconColor: "#000",
-            onCancelButtonPress: () => setSearchKeyword(""), // for ios
-            onClose: () => setSearchKeyword(""), // for android
-            onChangeText: ({ nativeEvent: { text } }) => setSearchKeyword(text),
+            onCancelButtonPress: () => setSearchKeywordWithDebounce(""), // for ios
+            onClose: () => setSearchKeywordWithDebounce(""), // for android
+            onChangeText: ({ nativeEvent: { text } }) =>
+              setSearchKeywordWithDebounce(text),
           },
         }}
       />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View style={styles.listOptionsContainer}>
-          <ListOptionButton
-            icon="filter"
-            label="Filters"
-            onPress={() => setFilterBottomSheetVisible(true)}
-          />
-          <ListOptionButton
-            icon="chevron-expand-outline"
-            iconSize={16}
-            label={`Sort by: ${activeMapper}`}
-            onPress={() => setSortBottomSheetVisible(true)}
-          />
-        </View>
-
-        <View style={styles.listContainer}>
-          <ProductsList products={products} />
-        </View>
-      </ScrollView>
-
-      <FilterBottomSheet
-        title="Filters"
-        isVisible={isFilterBottomSheetVisible}
-        onCloseButtonPress={() => setFilterBottomSheetVisible(false)}
-      />
-
-      <SortBottomSheet
-        isVisible={isSortBottomSheetVisible}
-        onMapperSelect={(mapperName: typeof activeMapper) => {
-          setActiveMapper(mapperName);
-          setSortBottomSheetVisible(false);
-        }}
-        onCloseButtonPress={() => setSortBottomSheetVisible(false)}
+      <FlatList
+        contentInsetAdjustmentBehavior="automatic"
+        showsVerticalScrollIndicator={false}
+        numColumns={2}
+        contentContainerStyle={styles.contentContainer}
+        columnWrapperStyle={styles.columnWrapper}
+        data={products}
+        renderItem={renderAsProducts}
+        keyExtractor={(product) => product.id}
+        ListHeaderComponent={
+          <View style={styles.listOptionsContainer}>
+            <ListOptionButton
+              icon="filter"
+              label="Filters"
+              onPress={() => router.push("/(modals)/filterBottomSheet")}
+            />
+            <ListOptionButton
+              icon="chevron-expand-outline"
+              iconSize={16}
+              label={`Sort by: ${activeMapper}`}
+              onPress={() => router.push("/(modals)/sortBottomSheet")}
+            />
+          </View>
+        }
       />
     </SafeAreaView>
   );
@@ -78,12 +74,17 @@ const styles = StyleSheet.create({
   listOptionsContainer: {
     flexDirection: "row",
     gap: 10,
-    marginTop: 10,
+    alignSelf: "flex-start",
+    marginBottom: 5,
   },
-  listContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+  contentContainer: {
     gap: 10,
-    marginVertical: 10,
+    paddingBottom: 10,
+  },
+  columnWrapper: {
+    gap: 10,
+  },
+  productCardContainer: {
+    width: "48%",
   },
 });

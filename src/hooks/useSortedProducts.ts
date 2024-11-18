@@ -1,13 +1,13 @@
+import { useProductListContext } from "@/contexts/productList/ProductListContext";
 import type { Product } from "@/types/product";
-import { useState } from "react";
+
+export type DefaultMapper = keyof typeof defaultMappers;
 
 export default function useSortedProducts(products: Product[]) {
-  const [activeMapper, setActiveMapper] =
-    useState<keyof typeof defaultMappers>("none");
+  const { selectedSortStrategy } = useProductListContext();
   return {
-    products: [...products].sort(defaultMappers[activeMapper]),
-    activeMapper,
-    setActiveMapper,
+    products: [...products].sort(defaultMappers[selectedSortStrategy]),
+    activeMapper: selectedSortStrategy,
   };
 }
 

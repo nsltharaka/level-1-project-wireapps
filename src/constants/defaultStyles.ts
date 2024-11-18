@@ -13,4 +13,4 @@ export const defaultStyles = StyleSheet.create({
   subText: {},
 });
 
-export const IOS_DEFAULT_BACKGROUND_COLOR = "rgb(242,242,247)";
+export const IOS_DEFAULT_BACKGROUND_COLOR = "#f2f2f2";
