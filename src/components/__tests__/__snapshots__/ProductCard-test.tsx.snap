@@ -1,0 +1,255 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProductCard /> Product card renders correctly with all optional configs 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "backgroundColor": "#fff",
+      "borderRadius": 16,
+      "elevation": 3,
+      "flex": 1,
+      "gap": 5,
+      "opacity": 1,
+      "padding": 10,
+      "shadowColor": "#000",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.22,
+      "shadowRadius": 2.22,
+    }
+  }
+>
+  <Image
+    source={
+      {
+        "uri": "https://s3-eu-west-1.amazonaws.com/api.themeshplatform.com/media/7e386191b2ee40b290886a05d3e10e24_nike-air-relentless-a.jpg",
+      }
+    }
+    style={
+      {
+        "height": 200,
+        "objectFit": "contain",
+        "width": "100%",
+      }
+    }
+  />
+  <Text
+    numberOfLines={2}
+    style={
+      {
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "height": 40,
+        "marginBottom": 5,
+      }
+    }
+  >
+    Nike Air Relentless 4 Mens Running Shoes
+  </Text>
+  <Text>
+    blue
+  </Text>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "opacity": 1,
+        "padding": 7,
+        "position": "absolute",
+        "right": 5,
+        "top": 5,
+      }
+    }
+  >
+    <Text />
+  </View>
+  <Text>
+    $ 
+    45.00
+  </Text>
+</View>
+`;
+
+exports[`<ProductCard /> renders correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "backgroundColor": "#fff",
+      "borderRadius": 16,
+      "elevation": 3,
+      "flex": 1,
+      "gap": 5,
+      "opacity": 1,
+      "padding": 10,
+      "shadowColor": "#000",
+      "shadowOffset": {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.22,
+      "shadowRadius": 2.22,
+    }
+  }
+>
+  <Image
+    source={
+      {
+        "uri": "https://s3-eu-west-1.amazonaws.com/api.themeshplatform.com/media/7e386191b2ee40b290886a05d3e10e24_nike-air-relentless-a.jpg",
+      }
+    }
+    style={
+      {
+        "height": 200,
+        "objectFit": "contain",
+        "width": "100%",
+      }
+    }
+  />
+  <Text
+    numberOfLines={2}
+    style={
+      {
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "height": 40,
+        "marginBottom": 5,
+      }
+    }
+  >
+    Nike Air Relentless 4 Mens Running Shoes
+  </Text>
+  <Text>
+    blue
+  </Text>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "opacity": 1,
+        "padding": 7,
+        "position": "absolute",
+        "right": 5,
+        "top": 5,
+      }
+    }
+  >
+    <Text />
+  </View>
+  <Text>
+    $ 
+    45.00
+  </Text>
+</View>
+`;
