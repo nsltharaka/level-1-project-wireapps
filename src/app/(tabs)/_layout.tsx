@@ -10,8 +10,9 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="(homeStack)"
         options={{
+          headerShown: false,
           title: "Home",
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
