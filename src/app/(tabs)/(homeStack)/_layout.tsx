@@ -1,4 +1,3 @@
-import { IOS_DEFAULT_BACKGROUND_COLOR } from "@/constants/defaultStyles";
 import { Stack } from "expo-router";
 
 export default function HomeStackLayout() {
@@ -7,12 +6,8 @@ export default function HomeStackLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Explore",
-          headerLargeTitle: true,
-          headerShadowVisible: false,
-          headerLargeStyle: {
-            backgroundColor: IOS_DEFAULT_BACKGROUND_COLOR,
-          },
+          title: "Discover",
+          headerShown: false,
         }}
       />
     </Stack>
