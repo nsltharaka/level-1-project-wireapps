@@ -3,9 +3,24 @@ import CartContextProvider from "@/contexts/cartContext/CartContext";
 import FavoritesContextProvider from "@/contexts/favorites/FavoritesContext";
 import ProductContextProvider from "@/contexts/ProductContext";
 import ProductListContextProvider from "@/contexts/productList/ProductListContext";
-import { Stack } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
+import { useEffect } from "react";
+
+// keep splash screen visible
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  useEffect(() => {
+    const prepare = async () => {
+      // intentional delay
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // hide splash screen
+      await SplashScreen.hideAsync();
+    };
+    prepare();
+  }, []);
+
   return (
     <ProductContextProvider>
       <CartContextProvider>
