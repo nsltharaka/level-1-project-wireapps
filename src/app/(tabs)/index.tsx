@@ -1,17 +1,6 @@
+import { Redirect } from "expo-router";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Home</Text>
-    </View>
-  );
+export default function TabsScreen() {
+  return <Redirect href={"/(homeStack)"} />;
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

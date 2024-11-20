@@ -9,9 +9,11 @@ export default function TabLayout() {
         tabBarActiveTintColor: "#000",
       }}
     >
+      <Tabs.Screen name="index" options={{ href: null }} />
       <Tabs.Screen
-        name="index"
+        name="(homeStack)"
         options={{
+          headerShown: false,
           title: "Home",
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
