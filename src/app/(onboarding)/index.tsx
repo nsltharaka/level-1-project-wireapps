@@ -11,10 +11,10 @@ export default function Onboarding() {
       <Text
         onPress={() => {
           setOnboarded(true);
-          router.replace("/");
+          router.replace("/(app)");
         }}
       >
-        set onboarded
+        set onboarded to true
       </Text>
     </View>
   );

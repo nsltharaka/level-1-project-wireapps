@@ -10,7 +10,7 @@ export default function AppLayout() {
   const { onboarded } = useGlobalContext();
 
   if (!onboarded) {
-    return <Redirect href="/onboarding" />;
+    return <Redirect href="/(onboarding)" />;
   }
 
   return (
