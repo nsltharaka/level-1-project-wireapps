@@ -1,4 +1,4 @@
-import { useProductContext } from "@/contexts/ProductContext";
+import { useProductContext } from "@/contexts/productList/ProductContext";
 import { useProductListContext } from "@/contexts/productList/ProductListContext";
 import type { Product } from "@/types/product";
 

@@ -6,7 +6,7 @@ export default function HomeStackLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Discover",
+          animation: "slide_from_right",
           headerShown: false,
         }}
       />
