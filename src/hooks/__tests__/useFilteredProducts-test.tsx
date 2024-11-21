@@ -1,4 +1,4 @@
-import ProductContextProvider from "@/contexts/ProductContext";
+import ProductContextProvider from "@/contexts/productList/ProductContext";
 import { ProductListContext } from "@/contexts/productList/ProductListContext";
 import sampleData from "@/data/sample.json";
 import { renderHook } from "@testing-library/react-native";

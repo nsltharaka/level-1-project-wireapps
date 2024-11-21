@@ -1,6 +1,6 @@
 import ProductCard from "@/components/storeScreen/ProductCard";
 import { useFavoritesContext } from "@/contexts/favorites/FavoritesContext";
-import { useProductContext } from "@/contexts/ProductContext";
+import { useProductContext } from "@/contexts/productList/ProductContext";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useFocusEffect } from "expo-router";
 import React, { useCallback, useState } from "react";

@@ -1,6 +1,6 @@
 import Article from "@/components/homeScreen/Article";
 import { IOS_DEFAULT_BACKGROUND_COLOR } from "@/constants/defaultStyles";
-import { useProductContext } from "@/contexts/ProductContext";
+import { useProductContext } from "@/contexts/productList/ProductContext";
 import { defaultFilters } from "@/hooks/useFilteredProducts";
 import { formatDate } from "@/utils/dates";
 import React from "react";

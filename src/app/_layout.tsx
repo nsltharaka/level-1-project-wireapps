@@ -1,7 +1,7 @@
 import CartIcon from "@/components/cart/CartIcon";
 import CartContextProvider from "@/contexts/cartContext/CartContext";
 import FavoritesContextProvider from "@/contexts/favorites/FavoritesContext";
-import ProductContextProvider from "@/contexts/ProductContext";
+import ProductContextProvider from "@/contexts/productList/ProductContext";
 import ProductListContextProvider from "@/contexts/productList/ProductListContext";
 import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
