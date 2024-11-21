@@ -1,6 +1,14 @@
-import { createContext, useContext, type PropsWithChildren } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  type PropsWithChildren,
+} from "react";
 
-type GlobalContext = {};
+type GlobalContext = {
+  onboarded: boolean;
+  setOnboarded: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 export const GlobalContext = createContext<GlobalContext | undefined>(
   undefined,
@@ -15,5 +23,15 @@ export function useGlobalContext() {
 }
 
 export default function GlobalContextProvider({ children }: PropsWithChildren) {
-  return <GlobalContext.Provider value={{}}>{children}</GlobalContext.Provider>;
+  const [onboarded, setOnboarded] = useState(false);
+  return (
+    <GlobalContext.Provider
+      value={{
+        onboarded,
+        setOnboarded,
+      }}
+    >
+      {children}
+    </GlobalContext.Provider>
+  );
 }
