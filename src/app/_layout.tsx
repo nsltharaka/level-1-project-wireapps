@@ -1,6 +1,7 @@
 import CartIcon from "@/components/cart/CartIcon";
 import CartContextProvider from "@/contexts/cartContext/CartContext";
 import FavoritesContextProvider from "@/contexts/favorites/FavoritesContext";
+import GlobalContextProvider from "@/contexts/GlobalContext";
 import ProductContextProvider from "@/contexts/productList/ProductContext";
 import ProductListContextProvider from "@/contexts/productList/ProductListContext";
 import { SplashScreen, Stack } from "expo-router";
@@ -22,15 +23,17 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <ProductContextProvider>
-      <CartContextProvider>
-        <FavoritesContextProvider>
-          <ProductListContextProvider>
-            <RootStack />
-          </ProductListContextProvider>
-        </FavoritesContextProvider>
-      </CartContextProvider>
-    </ProductContextProvider>
+    <GlobalContextProvider>
+      <ProductContextProvider>
+        <CartContextProvider>
+          <FavoritesContextProvider>
+            <ProductListContextProvider>
+              <RootStack />
+            </ProductListContextProvider>
+          </FavoritesContextProvider>
+        </CartContextProvider>
+      </ProductContextProvider>
+    </GlobalContextProvider>
   );
 }
 
