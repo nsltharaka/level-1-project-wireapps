@@ -10,7 +10,7 @@ export default function AppLayout() {
   const { onboarded } = useGlobalContext();
 
   if (!onboarded) {
-    return <Redirect href="/(onboarding)" />;
+    return <Redirect href="/onboarding/0" />;
   }
 
   return (
@@ -31,7 +31,10 @@ function AppStack() {
     <Stack>
       <Stack.Screen
         name="(tabs)"
-        options={{ headerShown: false, title: "Shop" }}
+        options={{
+          headerShown: false,
+          title: "Shop",
+        }}
       />
       <Stack.Screen
         name="product/[id]"
