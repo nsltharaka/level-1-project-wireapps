@@ -1,8 +1,9 @@
-import data from "@/data/sample.json";
+import { getAllProducts } from "@/services/productService";
 import type { Product } from "@/types/product";
 import {
   createContext,
   useContext,
+  useEffect,
   useState,
   type PropsWithChildren,
 } from "react";
@@ -15,7 +16,11 @@ const ProductContext = createContext<ProductContext | null>(null);
 export default function ProductContextProvider({
   children,
 }: PropsWithChildren) {
-  const [products] = useState<Product[]>(() => data);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    setProducts(getAllProducts());
+  }, []);
 
   return (
     <ProductContext.Provider value={{ products }}>

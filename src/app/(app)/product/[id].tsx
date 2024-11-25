@@ -1,19 +1,25 @@
 import AddToCartButton from "@/components/AddToCartButton";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { useCartContext } from "@/contexts/cartContext/CartContext";
-import { useProductContext } from "@/contexts/productList/ProductContext";
+import { getProductById } from "@/services/productService";
+import type { Product } from "@/types/product";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, StyleSheet, Text } from "react-native";
 
 export default function ProductDetailsScreen() {
   const params = useLocalSearchParams<{ id: string }>();
+  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(
+    undefined,
+  );
 
-  const { products } = useProductContext();
   const [_, dispatch] = useCartContext();
   const router = useRouter();
 
-  const selectedProduct = products.find((item) => item.id === params.id);
+  useEffect(() => {
+    setSelectedProduct(getProductById(params.id));
+  }, []);
+
   if (!selectedProduct) return null;
 
   return (
