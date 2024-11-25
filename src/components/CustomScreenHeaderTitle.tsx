@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     paddingHorizontal: sizeConstants.paddingSmall,
     paddingVertical: sizeConstants.paddingVerticalScreenHeader,
-    backgroundColor: colorConstants.backgroundIosDefault,
+    backgroundColor: colorConstants.backgroundDefaultIOS,
     gap: 5,
   },
   screenTitle: {

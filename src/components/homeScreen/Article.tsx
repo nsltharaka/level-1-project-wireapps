@@ -10,6 +10,11 @@ import {
   type ListRenderItem,
 } from "react-native";
 
+import {
+  colorConstants,
+  fontConstants,
+  sizeConstants,
+} from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
 import ProductCard from "../storeScreen/ProductCard";
 
@@ -59,35 +64,35 @@ export default function Article({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    paddingBottom: 10,
+    backgroundColor: colorConstants.backgroundDefault,
+    paddingBottom: sizeConstants.paddingSmall,
   },
   imageContainer: {
     flex: 1,
   },
   image: {
-    width: screenWidth,
+    width: sizeConstants.widthFullScreen,
     height: 500,
     objectFit: "cover",
   },
   descriptionContainer: {
-    padding: 20,
-    gap: 16,
+    padding: sizeConstants.paddingMedium,
+    gap: sizeConstants.flexGapDefault,
   },
   introText: {
-    fontWeight: "semibold",
-    fontSize: 16,
+    fontWeight: fontConstants.weightSemiBold,
+    fontSize: fontConstants.sizeRegular,
   },
   title: {
-    fontWeight: "bold",
-    fontSize: 28,
-    color: "#767676",
+    fontWeight: fontConstants.weightBold,
+    fontSize: fontConstants.sizeScreenHeaderTitle,
+    color: colorConstants.textSub,
   },
   productCardContainer: {
     width: 200,
   },
   contentContainer: {
-    gap: 10,
-    padding: 20,
+    gap: sizeConstants.flexGapHorizontalLists,
+    padding: sizeConstants.paddingMedium,
   },
 });
