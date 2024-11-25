@@ -1,5 +1,6 @@
 import { defaultStyles } from "@/constants/defaultStyles";
 import { useCartContext } from "@/contexts/cartContext/CartContext";
+import { colorConstants, sizeConstants } from "@/theme/styleConstants";
 import type { CartItem } from "@/types/cartItem";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
@@ -70,14 +71,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-    gap: 14,
+    gap: sizeConstants.flexGapDefault,
     alignItems: "center",
     height: 160,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 18,
-    borderColor: "gray",
-    padding: 10,
-    backgroundColor: "#fff",
+    borderWidth: sizeConstants.widthHairLine,
+    borderRadius: sizeConstants.borderRadiusDefault,
+    borderColor: colorConstants.backgroundDimmed,
+    padding: sizeConstants.paddingSmall,
+    backgroundColor: colorConstants.white,
   },
   imageContainer: {
     width: 100,
@@ -86,16 +87,16 @@ const styles = StyleSheet.create({
   descriptionContainer: {
     flex: 1,
     height: "100%",
-    gap: 5,
+    gap: sizeConstants.flexGapSmall,
   },
   quantityAdjuster: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 20,
-    marginTop: 10,
+    gap: sizeConstants.flexGapLarge,
+    marginTop: sizeConstants.marginMedium,
   },
   adjustButton: {
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: sizeConstants.widthHairLine,
     borderRadius: 100,
     padding: 2,
   },
