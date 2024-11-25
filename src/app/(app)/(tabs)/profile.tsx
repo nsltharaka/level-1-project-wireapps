@@ -1,4 +1,9 @@
 import ProfileOptionButton from "@/components/profileScreen/ProfileOptionButton";
+import {
+  colorConstants,
+  fontConstants,
+  sizeConstants,
+} from "@/theme/styleConstants";
 import React from "react";
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 
@@ -27,12 +32,12 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: colorConstants.white,
   },
   profileInfoContainer: {
     alignItems: "center",
-    gap: 20,
-    padding: 20,
+    gap: sizeConstants.flexGapLarge,
+    padding: sizeConstants.flexGapLarge,
   },
   profileImageContainer: {},
   avatar: {
@@ -40,14 +45,14 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
   },
   userName: {
-    fontSize: 24,
-    fontWeight: "semibold",
+    fontSize: fontConstants.sizeLarge,
+    fontWeight: fontConstants.weightSemiBold,
   },
   optionsContainer: {
-    width: "100%",
+    width: sizeConstants.widthFullScreen,
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: sizeConstants.marginLarge,
   },
 });

@@ -1,5 +1,6 @@
+import { sizeConstants } from "@/theme/styleConstants";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
 export default function OptionsSeparator({
   color,
@@ -12,7 +13,7 @@ export default function OptionsSeparator({
     <View
       style={{
         height: height,
-        borderWidth: StyleSheet.hairlineWidth,
+        borderWidth: sizeConstants.widthHairLine,
         borderColor: color,
       }}
     />

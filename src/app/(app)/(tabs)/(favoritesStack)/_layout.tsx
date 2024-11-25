@@ -1,4 +1,4 @@
-import { IOS_DEFAULT_BACKGROUND_COLOR } from "@/constants/defaultStyles";
+import { colorConstants } from "@/theme/styleConstants";
 import { Stack } from "expo-router";
 import React from "react";
 
@@ -12,7 +12,7 @@ export default function StoreStack() {
           headerShadowVisible: false,
           title: "Favorites",
           headerLargeStyle: {
-            backgroundColor: IOS_DEFAULT_BACKGROUND_COLOR,
+            backgroundColor: colorConstants.backgroundDefaultIOS,
           },
         }}
       />

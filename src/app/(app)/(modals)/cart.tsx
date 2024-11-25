@@ -1,5 +1,6 @@
 import CartItemCard from "@/components/cart/CartItemCard";
 import { useCartContext } from "@/contexts/cartContext/CartContext";
+import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import React from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
@@ -31,17 +32,20 @@ export default function Cart() {
 
 const styles = StyleSheet.create({
   ContentContainer: {
-    gap: 10,
-    padding: 10,
+    gap: sizeConstants.flexGapMedium,
+    padding: sizeConstants.paddingSmall,
   },
   cartDescription: {
-    marginTop: 20,
-    paddingHorizontal: 20,
+    marginTop: sizeConstants.marginLarge,
+    paddingHorizontal: sizeConstants.paddingLarge,
   },
   totalAmount: {
-    fontWeight: "bold",
-    fontSize: 20,
+    fontWeight: fontConstants.weightBold,
+    fontSize: fontConstants.sizeMedium,
     alignSelf: "flex-end",
   },
-  emptyComponent: {},
+  emptyComponent: {
+    height: "100%",
+    justifyContent: "center",
+  },
 });

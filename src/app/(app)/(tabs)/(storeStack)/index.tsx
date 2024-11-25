@@ -3,6 +3,7 @@ import ProductCard from "@/components/storeScreen/ProductCard";
 import useDebounceSearch from "@/hooks/useDebounceSearch";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
 import useSortedProducts from "@/hooks/useSortedProducts";
+import { sizeConstants } from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
 import { router, Stack } from "expo-router";
 import React from "react";
@@ -46,6 +47,7 @@ export default function StoreScreen() {
         data={products}
         renderItem={renderAsProducts}
         keyExtractor={(product) => product.id}
+        ListHeaderComponentStyle={styles.ListHeaderComponent}
         ListHeaderComponent={
           <View style={styles.listOptionsContainer}>
             <ListOptionButton
@@ -69,20 +71,24 @@ export default function StoreScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: sizeConstants.paddingSmall,
+  },
+  ListHeaderComponent: {
+    width: sizeConstants.widthFullScreen,
   },
   listOptionsContainer: {
     flexDirection: "row",
-    gap: 10,
+    gap: sizeConstants.flexGapMedium,
   },
   contentContainer: {
-    gap: 10,
-    paddingVertical: 10,
+    gap: sizeConstants.flexGapMedium,
+    alignItems: "center",
+    paddingVertical: sizeConstants.paddingMedium,
   },
   columnWrapper: {
-    gap: 10,
+    gap: sizeConstants.flexGapMedium,
   },
   productCardContainer: {
-    width: "48%",
+    width: "48.5%",
   },
 });

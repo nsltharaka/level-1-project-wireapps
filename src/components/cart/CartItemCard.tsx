@@ -1,8 +1,11 @@
-import { defaultStyles } from "@/constants/defaultStyles";
 import { useCartContext } from "@/contexts/cartContext/CartContext";
+import {
+  colorConstants,
+  fontConstants,
+  sizeConstants,
+} from "@/theme/styleConstants";
 import type { CartItem } from "@/types/cartItem";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -15,15 +18,12 @@ export default function CartItemCard({ item }: Props) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.imageContainer}
-        onPress={() => router.navigate(`/product/${item.id}`)}
-      >
-        <Image source={{ uri: item.mainImage }} style={defaultStyles.image} />
+      <TouchableOpacity style={styles.imageContainer}>
+        <Image source={{ uri: item.mainImage }} style={styles.image} />
       </TouchableOpacity>
 
       <View style={styles.descriptionContainer}>
-        <Text numberOfLines={2} style={defaultStyles.itemName}>
+        <Text numberOfLines={2} style={styles.itemName}>
           {item.name}
         </Text>
         <Text>color : {item.colour}</Text>
@@ -70,32 +70,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-    gap: 14,
+    gap: sizeConstants.flexGapDefault,
     alignItems: "center",
     height: 160,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 18,
-    borderColor: "gray",
-    padding: 10,
-    backgroundColor: "#fff",
+    borderWidth: sizeConstants.widthHairLine,
+    borderRadius: sizeConstants.borderRadiusDefault,
+    borderColor: colorConstants.backgroundDimmed,
+    padding: sizeConstants.paddingSmall,
+    backgroundColor: colorConstants.white,
   },
   imageContainer: {
     width: 100,
     height: "100%",
   },
+  image: {
+    width: sizeConstants.widthFullScreen,
+    height: "100%",
+    objectFit: "contain",
+  },
+  itemName: {
+    fontWeight: fontConstants.weightBold,
+    fontSize: fontConstants.sizeRegular,
+  },
   descriptionContainer: {
     flex: 1,
     height: "100%",
-    gap: 5,
+    gap: sizeConstants.flexGapMedium,
   },
   quantityAdjuster: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 20,
-    marginTop: 10,
+    gap: sizeConstants.flexGapLarge,
+    marginTop: sizeConstants.marginSmall,
   },
   adjustButton: {
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: sizeConstants.widthHairLine,
     borderRadius: 100,
     padding: 2,
   },

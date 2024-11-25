@@ -1,6 +1,7 @@
 import ProductCard from "@/components/storeScreen/ProductCard";
 import { useFavoritesContext } from "@/contexts/favorites/FavoritesContext";
 import { useProductContext } from "@/contexts/productList/ProductContext";
+import { sizeConstants } from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useFocusEffect } from "expo-router";
 import React, { useCallback, useState } from "react";
@@ -65,14 +66,14 @@ const styles = StyleSheet.create({
   listContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 12,
-    padding: 10,
+    gap: sizeConstants.flexGapMedium,
+    padding: sizeConstants.paddingSmall,
   },
   closeButton: {
     alignItems: "center",
     backgroundColor: "#fff",
     borderRadius: 100,
-    borderWidth: StyleSheet.hairlineWidth,
+    borderWidth: sizeConstants.widthHairLine,
     justifyContent: "center",
     padding: 3,
     position: "absolute",
