@@ -64,8 +64,8 @@ export default function Article({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colorConstants.backgroundDefault,
-    paddingBottom: sizeConstants.paddingSmall,
+    backgroundColor: colorConstants.backgroundLight,
+    paddingBottom: sizeConstants.paddingMedium,
   },
   imageContainer: {
     flex: 1,
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     objectFit: "cover",
   },
   descriptionContainer: {
-    padding: sizeConstants.paddingMedium,
+    padding: sizeConstants.paddingLarge,
     gap: sizeConstants.flexGapDefault,
   },
   introText: {
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     width: 200,
   },
   contentContainer: {
-    gap: sizeConstants.flexGapHorizontalLists,
-    padding: sizeConstants.paddingMedium,
+    gap: sizeConstants.flexGapMedium,
+    padding: sizeConstants.paddingLarge,
   },
 });

@@ -1,10 +1,14 @@
 import SelectableOption from "@/components/bottomSheets/filter/SelectableOption";
-import { IOS_DEFAULT_BACKGROUND_COLOR } from "@/constants/defaultStyles";
 import {
   brands,
   colors,
   useProductListContext,
 } from "@/contexts/productList/ProductListContext";
+import {
+  colorConstants,
+  fontConstants,
+  sizeConstants,
+} from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useState } from "react";
@@ -115,9 +119,17 @@ export default function FilterBottomSheet() {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={onClear}
-              style={[styles.actionButton, { backgroundColor: "#fff" }]}
+              style={[
+                styles.actionButton,
+                { backgroundColor: colorConstants.white },
+              ]}
             >
-              <Text style={[styles.actionButtonText, { color: "#000" }]}>
+              <Text
+                style={[
+                  styles.actionButtonText,
+                  { color: colorConstants.black },
+                ]}
+              >
                 Clear all filters
               </Text>
             </TouchableOpacity>
@@ -132,63 +144,64 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     justifyContent: "flex-end",
-    backgroundColor: "#00000080",
+    backgroundColor: colorConstants.backgroundDimmed,
   },
   modal: {
     height: "50%",
-    backgroundColor: "white",
-    borderTopRightRadius: 18,
-    borderTopLeftRadius: 18,
+    backgroundColor: colorConstants.backgroundLight,
+    borderTopRightRadius: sizeConstants.borderRadiusDefault,
+    borderTopLeftRadius: sizeConstants.borderRadiusDefault,
   },
   titleContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: "grey",
+    paddingVertical: sizeConstants.paddingSmall,
+    paddingLeft: sizeConstants.paddingLarge,
+    paddingRight: sizeConstants.paddingSmall,
+    borderBottomWidth: sizeConstants.widthHairLine,
+    borderBottomColor: colorConstants.backgroundDimmed,
   },
   title: {
-    fontWeight: "bold",
-    fontSize: 16,
+    fontWeight: fontConstants.weightBold,
+    fontSize: fontConstants.sizeRegular,
   },
   content: {
-    padding: 20,
-    paddingBottom: 40,
+    padding: sizeConstants.paddingLarge,
+    paddingBottom: sizeConstants.paddingLarge * 2,
     flex: 1,
     justifyContent: "space-between",
   },
   filterContainer: {
-    gap: 20,
+    gap: sizeConstants.flexGapLarge,
   },
   optionRow: {
     flexDirection: "row",
-    gap: 20,
+    gap: sizeConstants.flexGapLarge,
     alignItems: "center",
   },
   optionTitle: {
-    fontWeight: "bold",
+    fontWeight: fontConstants.weightBold,
   },
   optionTextInput: {
-    backgroundColor: IOS_DEFAULT_BACKGROUND_COLOR,
+    backgroundColor: colorConstants.backgroundDefaultIOS,
     width: 70,
     padding: 7,
     borderRadius: 8,
   },
   buttonContainer: {
-    gap: 12,
+    gap: sizeConstants.flexGapMedium,
   },
   actionButton: {
-    backgroundColor: "#000",
+    backgroundColor: colorConstants.backgroundDark,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 16,
+    paddingVertical: sizeConstants.paddingMedium,
     borderRadius: 10,
     borderWidth: 1,
   },
   actionButtonText: {
-    color: "#fff",
-    fontWeight: "bold",
+    color: colorConstants.white,
+    fontWeight: fontConstants.weightBold,
   },
 });

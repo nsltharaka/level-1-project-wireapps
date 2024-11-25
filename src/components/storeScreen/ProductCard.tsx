@@ -1,3 +1,8 @@
+import {
+  colorConstants,
+  fontConstants,
+  sizeConstants,
+} from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
 import { router } from "expo-router";
 import React, {
@@ -61,11 +66,11 @@ ProductCard.Price = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    borderRadius: 16,
+    backgroundColor: colorConstants.backgroundLight,
+    borderRadius: sizeConstants.borderRadiusDefault,
     flex: 1,
-    padding: 10,
-    shadowColor: "#000",
+    padding: sizeConstants.paddingSmall,
+    shadowColor: colorConstants.black,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -73,21 +78,21 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
     elevation: 3,
-    gap: 5,
+    gap: sizeConstants.flexGapSmall,
   },
   image: {
     height: 200,
     objectFit: "contain",
-    width: "100%",
+    width: sizeConstants.widthFullScreen,
   },
   itemName: {
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: fontConstants.sizeRegular,
+    fontWeight: fontConstants.weightBold,
     height: 40,
-    marginBottom: 5,
+    marginBottom: sizeConstants.marginSmall,
   },
   favoritesButton: {
-    padding: 7,
+    padding: sizeConstants.paddingSmall,
     position: "absolute",
     right: 5,
     top: 5,

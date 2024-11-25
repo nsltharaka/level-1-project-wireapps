@@ -22,7 +22,7 @@ export default function CustomScreenHeaderTitle({ title, subTitle }: Props) {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    paddingHorizontal: sizeConstants.paddingSmall,
+    paddingHorizontal: sizeConstants.paddingMedium,
     paddingVertical: sizeConstants.paddingVerticalScreenHeader,
     backgroundColor: colorConstants.backgroundDefaultIOS,
     gap: 5,

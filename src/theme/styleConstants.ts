@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+
 const fontConstants = {
   sizeScreenHeaderTitle: 34,
   sizeScreenHeaderSubTitle: 18,
@@ -7,19 +9,29 @@ const fontConstants = {
 } as const;
 
 const colorConstants = {
-  backgroundDefault: "#fff",
+  black: "#000",
+  white: "#fff",
+  backgroundLight: "#fff",
+  backgroundDark: "#000",
   backgroundDefaultIOS: "#f2f2f2",
+  backgroundDimmed: "#00000080",
   textMain: "#000",
   textSub: "#767676",
 } as const;
 
 const sizeConstants = {
+  borderRadiusDefault: 18,
+  flexGapSmall: 5,
   flexGapDefault: 16,
-  flexGapHorizontalLists: 10,
-  paddingMedium: 20,
-  paddingSmall: 16,
+  flexGapMedium: 10,
+  flexGapLarge: 20,
+  marginSmall: 5,
+  paddingSmall: 10,
+  paddingMedium: 14,
+  paddingLarge: 20,
   paddingVerticalScreenHeader: 40,
   widthFullScreen: "100%",
+  widthHairLine: StyleSheet.hairlineWidth,
 } as const;
 
 export { colorConstants, fontConstants, sizeConstants };
