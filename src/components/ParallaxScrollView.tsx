@@ -1,3 +1,4 @@
+import { colorConstants, sizeConstants } from "@/theme/styleConstants";
 import type { PropsWithChildren, ReactElement } from "react";
 import { StyleSheet, View } from "react-native";
 import Animated, {
@@ -53,7 +54,7 @@ export default function ParallaxScrollView({ children, headerImage }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: colorConstants.white,
   },
   header: {
     height: 300,
@@ -61,9 +62,9 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: 20,
-    gap: 16,
+    padding: sizeConstants.paddingLarge,
+    gap: sizeConstants.flexGapDefault,
     overflow: "hidden",
-    backgroundColor: "#fff",
+    backgroundColor: colorConstants.white,
   },
 });
