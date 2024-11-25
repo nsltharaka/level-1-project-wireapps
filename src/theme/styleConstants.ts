@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const fontConstants = {
   sizeHeaderTitle: 34,
   sizeHeaderSubTitle: 18,
+  sizeDefault: 14,
   sizeRegular: 16,
   sizeMedium: 20,
   sizeLarge: 24,

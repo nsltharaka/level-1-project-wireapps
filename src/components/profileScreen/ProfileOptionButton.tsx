@@ -1,3 +1,4 @@
+import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import React, { type ComponentProps } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
@@ -22,9 +23,9 @@ export default function ProfileOptionButton({
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    gap: 5,
+    gap: sizeConstants.flexGapSmall,
   },
   buttonName: {
-    fontSize: 14,
+    fontSize: fontConstants.sizeDefault,
   },
 });
