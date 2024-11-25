@@ -4,6 +4,7 @@ const fontConstants = {
   sizeScreenHeaderTitle: 34,
   sizeScreenHeaderSubTitle: 18,
   sizeRegular: 16,
+  sizeMedium: 20,
   weightBold: "bold",
   weightSemiBold: "semibold",
 } as const;
@@ -26,6 +27,7 @@ const sizeConstants = {
   flexGapMedium: 10,
   flexGapLarge: 20,
   marginSmall: 5,
+  marginLarge: 20,
   paddingSmall: 10,
   paddingMedium: 14,
   paddingLarge: 20,
