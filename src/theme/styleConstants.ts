@@ -5,7 +5,7 @@ const fontConstants = {
   sizeHeaderSubTitle: 18,
   sizeDefault: 14,
   sizeRegular: 16,
-  sizeMedium: 20,
+  sizeMedium: 18,
   sizeLarge: 24,
   weightBold: "bold",
   weightSemiBold: "semibold",
