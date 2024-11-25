@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: fontConstants.weightBold,
-    fontSize: fontConstants.sizeScreenHeaderTitle,
+    fontSize: fontConstants.sizeHeaderTitle,
     color: colorConstants.textSub,
   },
   productCardContainer: {

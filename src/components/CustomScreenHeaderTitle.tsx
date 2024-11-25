@@ -28,11 +28,11 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   screenTitle: {
-    fontSize: fontConstants.sizeScreenHeaderTitle,
+    fontSize: fontConstants.sizeHeaderTitle,
     fontWeight: fontConstants.weightBold,
   },
   screenSubTitle: {
     color: colorConstants.textSub,
-    fontSize: fontConstants.sizeScreenHeaderSubTitle,
+    fontSize: fontConstants.sizeHeaderSubTitle,
   },
 });
