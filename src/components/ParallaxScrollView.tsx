@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    padding: sizeConstants.paddingLarge,
+    padding: sizeConstants.paddingMedium,
     gap: sizeConstants.flexGapDefault,
     overflow: "hidden",
     backgroundColor: colorConstants.white,
