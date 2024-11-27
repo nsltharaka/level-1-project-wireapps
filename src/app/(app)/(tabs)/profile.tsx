@@ -4,8 +4,16 @@ import {
   fontConstants,
   sizeConstants,
 } from "@/theme/styleConstants";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
-import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 export default function ProfileScreen() {
   return (
@@ -25,9 +33,14 @@ export default function ProfileScreen() {
           <ProfileOptionButton buttonName="Settings" icon="settings-outline" />
         </View>
       </View>
+      <Button title="clear async storage" onPress={clearAsyncStorage} />
     </SafeAreaView>
   );
 }
+
+const clearAsyncStorage = async () => {
+  await AsyncStorage.removeItem("@onboarded");
+};
 
 const styles = StyleSheet.create({
   container: {

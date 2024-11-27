@@ -1,13 +1,8 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  type PropsWithChildren,
-} from "react";
+import { createContext, useContext } from "react";
 
 type GlobalContext = {
   onboarded: boolean;
-  setOnboarded: React.Dispatch<React.SetStateAction<boolean>>;
+  setAsOnboarded: () => Promise<void>;
 };
 
 export const GlobalContext = createContext<GlobalContext | undefined>(
@@ -20,18 +15,4 @@ export function useGlobalContext() {
     throw new Error("component must be wrapped inside GlobalContextProvider");
   }
   return value;
-}
-
-export default function GlobalContextProvider({ children }: PropsWithChildren) {
-  const [onboarded, setOnboarded] = useState(false);
-  return (
-    <GlobalContext.Provider
-      value={{
-        onboarded,
-        setOnboarded,
-      }}
-    >
-      {children}
-    </GlobalContext.Provider>
-  );
 }
