@@ -1,25 +1,43 @@
-import GlobalContextProvider from "@/contexts/GlobalContext";
+import { GlobalContext } from "@/contexts/GlobalContext";
+import useAsyncStorage from "@/hooks/useAsyncStorage";
 import { Slot, SplashScreen } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // keep splash screen visible
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  useEffect(() => {
-    const prepare = async () => {
-      // intentional delay
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+  const { loaded, data, error, setValue } = useAsyncStorage("@onboarded");
+  const [onboarded, setOnboarded] = useState(false);
 
-      // hide splash screen
-      await SplashScreen.hideAsync();
-    };
-    prepare();
-  }, []);
+  const setAsOnboarded = async () => {
+    setValue("1");
+    setOnboarded(true);
+  };
+
+  useEffect(() => {
+    if (data && data === "1") {
+      setOnboarded(true);
+    }
+    if (error) {
+      console.log(error);
+    }
+
+    SplashScreen.hideAsync();
+  }, [loaded]);
+
+  if (!loaded) {
+    return null;
+  }
 
   return (
-    <GlobalContextProvider>
+    <GlobalContext.Provider
+      value={{
+        onboarded,
+        setAsOnboarded,
+      }}
+    >
       <Slot />
-    </GlobalContextProvider>
+    </GlobalContext.Provider>
   );
 }
