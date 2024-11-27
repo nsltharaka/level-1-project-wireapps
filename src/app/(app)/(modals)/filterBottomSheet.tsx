@@ -21,30 +21,32 @@ import {
 } from "react-native";
 
 export default function FilterBottomSheet() {
-  const {
-    selectedBrand,
-    setSelectedBrand,
-    selectedColor,
-    setSelectedColor,
-    selectedPriceRange,
-    setSelectedPriceRange,
-  } = useProductListContext();
+  const { selectedFilters, setFilters } = useProductListContext();
 
-  const [brand, setBrand] = useState<typeof selectedBrand>(selectedBrand);
-  const [color, setColor] = useState<typeof selectedColor>(selectedColor);
-  const [priceRange, setPriceRange] =
-    useState<typeof selectedPriceRange>(selectedPriceRange);
+  const [brand, setBrand] = useState<(typeof selectedFilters)["brand"]>(
+    selectedFilters.brand,
+  );
+  const [color, setColor] = useState<(typeof selectedFilters)["color"]>(
+    selectedFilters.color,
+  );
+  const [priceRange, setPriceRange] = useState<
+    (typeof selectedFilters)["priceRange"]
+  >(selectedFilters.priceRange);
 
   const onApply = () => {
-    setSelectedBrand(brand);
-    setSelectedColor(color);
-    setSelectedPriceRange(priceRange);
+    setFilters({
+      brand,
+      color,
+      priceRange,
+    });
     router.back();
   };
   const onClear = () => {
-    setSelectedBrand("any");
-    setSelectedColor("any");
-    setSelectedPriceRange([0, 0]);
+    setFilters({
+      brand: "any",
+      color: "any",
+      priceRange: [0, 0],
+    });
     router.back();
   };
 
@@ -93,7 +95,7 @@ export default function FilterBottomSheet() {
                 <Text>From</Text>
                 <TextInput
                   keyboardType="number-pad"
-                  defaultValue={selectedPriceRange[0].toString()}
+                  defaultValue={selectedFilters.priceRange[0].toString()}
                   selectTextOnFocus
                   onChangeText={(text) =>
                     setPriceRange((prev) => [Number.parseFloat(text), prev[1]])
@@ -103,7 +105,7 @@ export default function FilterBottomSheet() {
                 <Text>To</Text>
                 <TextInput
                   keyboardType="number-pad"
-                  defaultValue={selectedPriceRange[1].toString()}
+                  defaultValue={selectedFilters.priceRange[1].toString()}
                   selectTextOnFocus
                   onChangeText={(text) =>
                     setPriceRange((prev) => [prev[0], Number.parseFloat(text)])

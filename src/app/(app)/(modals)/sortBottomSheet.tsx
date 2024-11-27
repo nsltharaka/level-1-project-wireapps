@@ -6,10 +6,10 @@ import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 
 export default function FilterBottomSheet() {
-  const { setSelectedSortStrategy } = useProductListContext();
+  const { setSortStrategy } = useProductListContext();
 
   const setStrategy = (strategy: DefaultMapper) => {
-    setSelectedSortStrategy(strategy);
+    setSortStrategy(strategy);
     router.back();
   };
 

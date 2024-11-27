@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     gap: sizeConstants.flexGapMedium,
-    alignItems: "center",
     paddingVertical: sizeConstants.paddingMedium,
   },
   columnWrapper: {

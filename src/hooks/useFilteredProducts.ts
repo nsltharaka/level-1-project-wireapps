@@ -6,14 +6,13 @@ export type Predicate = (item: Product) => boolean;
 
 export default function useFilteredProducts() {
   const { products } = useProductContext();
-  const { selectedBrand, selectedColor, selectedPriceRange, searchKeyword } =
-    useProductListContext();
+  const { selectedFilters, searchKeyword } = useProductListContext();
 
   const filters = [
-    defaultFilters.withBrand(selectedBrand),
-    defaultFilters.withColor(selectedColor),
+    defaultFilters.withBrand(selectedFilters.brand),
+    defaultFilters.withColor(selectedFilters.color),
     defaultFilters.withSearchKeyword(searchKeyword),
-    defaultFilters.withPriceRange(selectedPriceRange),
+    defaultFilters.withPriceRange(selectedFilters.priceRange),
   ];
 
   return {

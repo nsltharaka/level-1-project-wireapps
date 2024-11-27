@@ -9,50 +9,54 @@ import React, {
 export const brands = ["any", "Nike", "Puma"] as const;
 export const colors = ["any", "Blue", "Black"] as const;
 
-export const ProductListContext = createContext<{
-  searchKeyword: string;
-  setSearchKeyword: React.Dispatch<React.SetStateAction<string>>;
-  selectedBrand: (typeof brands)[number];
-  setSelectedBrand: React.Dispatch<
-    React.SetStateAction<(typeof brands)[number]>
-  >;
-  selectedColor: (typeof colors)[number];
-  setSelectedColor: React.Dispatch<
-    React.SetStateAction<(typeof colors)[number]>
-  >;
-  selectedPriceRange: [number, number];
-  setSelectedPriceRange: React.Dispatch<React.SetStateAction<[number, number]>>;
+type ProductListContextType = {
+  selectedFilters: SelectedFiltersType;
   selectedSortStrategy: DefaultMapper;
-  setSelectedSortStrategy: React.Dispatch<React.SetStateAction<DefaultMapper>>;
-} | null>(null);
+  searchKeyword: string;
+  setFilters: (filters: SelectedFiltersType) => void;
+  setSortStrategy: (strategy: DefaultMapper) => void;
+  setSearchKeyword: (keyword: string) => void;
+} | null;
+
+type SelectedFiltersType = {
+  brand: string;
+  color: string;
+  priceRange: [number, number];
+};
+
+export const ProductListContext = createContext<ProductListContextType | null>(
+  null,
+);
 
 export default function ProductListContextProvider({
   children,
 }: PropsWithChildren) {
-  const [searchKeyword, setSearchKeyword] = useState("");
-  const [selectedBrand, setSelectedBrand] =
-    useState<(typeof brands)[number]>("any");
-  const [selectedColor, setSelectedColor] =
-    useState<(typeof colors)[number]>("any");
-  const [selectedPriceRange, setSelectedPriceRange] = useState<
-    [number, number]
-  >([0.0, 0.0]);
+  const [selectedFilters, setSelectedFilters] = useState<SelectedFiltersType>({
+    brand: "any",
+    color: "any",
+    priceRange: [0, 0],
+  });
   const [selectedSortStrategy, setSelectedSortStrategy] =
     useState<DefaultMapper>("none");
+  const [searchKeyword, setKeyword] = useState("");
+
+  const setFilters = (filters: typeof selectedFilters) => {
+    setSelectedFilters({ ...filters });
+  };
+  const setSortStrategy = (strategy: DefaultMapper) => {
+    setSelectedSortStrategy(strategy);
+  };
+  const setSearchKeyword = (keyword: string) => setKeyword(keyword);
 
   return (
     <ProductListContext.Provider
       value={{
-        searchKeyword,
-        setSearchKeyword,
-        selectedBrand,
-        setSelectedBrand,
-        selectedColor,
-        setSelectedColor,
-        selectedPriceRange,
-        setSelectedPriceRange,
+        selectedFilters,
         selectedSortStrategy,
-        setSelectedSortStrategy,
+        searchKeyword,
+        setFilters,
+        setSortStrategy,
+        setSearchKeyword,
       }}
     >
       {children}
