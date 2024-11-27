@@ -1,3 +1,4 @@
+import { colorConstants, sizeConstants } from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import React, { type ComponentProps } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
@@ -26,11 +27,11 @@ export default function ListOptionButton({
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    gap: 10,
-    backgroundColor: "#fff",
-    padding: 10,
-    paddingHorizontal: 12,
-    borderRadius: 18,
+    gap: sizeConstants.flexGapMedium,
+    backgroundColor: colorConstants.backgroundLight,
+    padding: sizeConstants.paddingMedium,
+    paddingHorizontal: sizeConstants.paddingMedium,
+    borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
   },

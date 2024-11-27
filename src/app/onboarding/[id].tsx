@@ -1,4 +1,9 @@
 import { useGlobalContext } from "@/contexts/GlobalContext";
+import {
+  colorConstants,
+  fontConstants,
+  sizeConstants,
+} from "@/theme/styleConstants";
 import { router, useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -57,32 +62,32 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    width: "100%",
+    width: sizeConstants.widthFullScreen,
     height: "100%",
     objectFit: "cover",
   },
   description: {
     position: "absolute",
-    bottom: 80,
-    width: "100%",
-    height: 320,
+    bottom: 100,
+    width: sizeConstants.widthFullScreen,
+    height: 260,
     justifyContent: "space-between",
-    padding: 20,
+    padding: sizeConstants.paddingLarge,
   },
   text: {
-    color: "#fff",
-    fontSize: 38,
-    fontWeight: "bold",
+    color: colorConstants.white,
+    fontSize: fontConstants.sizeHeaderTitle,
+    fontWeight: fontConstants.weightBold,
   },
   button: {
-    backgroundColor: "#fff",
-    padding: 18,
+    backgroundColor: colorConstants.white,
+    padding: sizeConstants.paddingLarge,
     alignItems: "center",
-    borderRadius: 30,
+    borderRadius: 100,
   },
   buttonText: {
-    color: "#000",
-    fontWeight: "bold",
-    fontSize: 20,
+    color: colorConstants.black,
+    fontWeight: fontConstants.weightBold,
+    fontSize: fontConstants.sizeMedium,
   },
 });

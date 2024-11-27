@@ -1,3 +1,4 @@
+import { colorConstants, fontConstants } from "@/theme/styleConstants";
 import React from "react";
 import { StyleSheet, Text, type TextProps } from "react-native";
 
@@ -26,8 +27,8 @@ const styles = StyleSheet.create({
     padding: 7,
   },
   selectedText: {
-    backgroundColor: "#000",
-    color: "#fff",
-    fontWeight: "bold",
+    backgroundColor: colorConstants.black,
+    color: colorConstants.white,
+    fontWeight: fontConstants.weightBold,
   },
 });

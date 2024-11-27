@@ -2,6 +2,7 @@ import AddToCartButton from "@/components/AddToCartButton";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { useCartContext } from "@/contexts/cartContext/CartContext";
 import { getProductById } from "@/services/productService";
+import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -54,7 +55,7 @@ export default function ProductDetailsScreen() {
 
 const styles = StyleSheet.create({
   image: {
-    width: "100%",
+    width: sizeConstants.widthFullScreen,
     height: "100%",
     objectFit: "contain",
     bottom: 0,
@@ -62,8 +63,8 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   itemName: {
-    fontWeight: "bold",
-    fontSize: 22,
+    fontWeight: fontConstants.weightBold,
+    fontSize: fontConstants.sizeLarge,
   },
   itemPrice: {},
   itemColor: {},

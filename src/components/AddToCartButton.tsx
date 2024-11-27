@@ -1,3 +1,8 @@
+import {
+  colorConstants,
+  fontConstants,
+  sizeConstants,
+} from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
@@ -28,15 +33,13 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#000",
-    padding: 20,
-    borderRadius: 18,
-    flexDirection: "row",
-    gap: 20,
+    backgroundColor: colorConstants.black,
+    padding: sizeConstants.paddingLarge,
+    borderRadius: sizeConstants.borderRadiusDefault,
   },
   buttonText: {
-    fontWeight: "bold",
-    fontSize: 18,
+    fontWeight: fontConstants.weightBold,
+    fontSize: fontConstants.sizeMedium,
     color: "#fff",
   },
   buttonIcon: {

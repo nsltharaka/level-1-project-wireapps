@@ -1,4 +1,5 @@
 import { useCartContext } from "@/contexts/cartContext/CartContext";
+import { colorConstants, fontConstants } from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React from "react";
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   labelWrapper: {
-    backgroundColor: "red",
+    backgroundColor: colorConstants.backgroundRed,
     borderRadius: 100,
     paddingHorizontal: 1,
     position: "absolute",
@@ -55,8 +56,8 @@ const styles = StyleSheet.create({
     minWidth: 16,
   },
   label: {
-    color: "#fff",
-    fontWeight: "bold",
+    color: colorConstants.white,
+    fontWeight: fontConstants.weightBold,
     fontSize: 12,
   },
 });

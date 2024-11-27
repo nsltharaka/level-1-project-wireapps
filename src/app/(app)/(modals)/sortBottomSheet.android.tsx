@@ -1,5 +1,10 @@
 import { useProductListContext } from "@/contexts/productList/ProductListContext";
 import type { DefaultMapper } from "@/hooks/useSortedProducts";
+import {
+  colorConstants,
+  fontConstants,
+  sizeConstants,
+} from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React from "react";
@@ -52,33 +57,34 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     justifyContent: "flex-end",
-    backgroundColor: "#00000080",
+    backgroundColor: colorConstants.backgroundDimmed,
   },
   modal: {
     height: "30%",
-    backgroundColor: "white",
-    borderTopRightRadius: 18,
-    borderTopLeftRadius: 18,
+    backgroundColor: colorConstants.backgroundLight,
+    borderTopRightRadius: sizeConstants.borderRadiusDefault,
+    borderTopLeftRadius: sizeConstants.borderRadiusDefault,
   },
   titleContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: "grey",
+    paddingVertical: sizeConstants.paddingSmall,
+    paddingLeft: sizeConstants.paddingLarge,
+    paddingRight: sizeConstants.paddingSmall,
+    borderBottomWidth: sizeConstants.widthHairLine,
+    borderBottomColor: colorConstants.backgroundDimmed,
   },
   title: {
-    fontWeight: "bold",
-    fontSize: 16,
+    fontWeight: fontConstants.weightBold,
+    fontSize: fontConstants.sizeRegular,
   },
   content: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
-    gap: 20,
+    padding: sizeConstants.paddingLarge,
+    gap: sizeConstants.flexGapLarge,
   },
   sortOption: {
     color: "dodgerblue",
