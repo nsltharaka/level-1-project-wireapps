@@ -1,13 +1,15 @@
+import useAsyncStorage from "@/hooks/useAsyncStorage";
 import {
   createContext,
   useContext,
+  useEffect,
   useState,
   type PropsWithChildren,
 } from "react";
 
 type GlobalContext = {
   onboarded: boolean;
-  setOnboarded: React.Dispatch<React.SetStateAction<boolean>>;
+  setAsOnboarded: () => Promise<void>;
 };
 
 export const GlobalContext = createContext<GlobalContext | undefined>(
@@ -23,12 +25,32 @@ export function useGlobalContext() {
 }
 
 export default function GlobalContextProvider({ children }: PropsWithChildren) {
+  const { loaded, data, error, setValue } = useAsyncStorage("@onboarded");
   const [onboarded, setOnboarded] = useState(false);
+
+  const setAsOnboarded = async () => {
+    setValue("1");
+    setOnboarded(true);
+  };
+
+  useEffect(() => {
+    if (data && data === "1") {
+      setOnboarded(true);
+    }
+    if (error) {
+      console.log(error);
+    }
+  }, [loaded]);
+
+  if (!loaded) {
+    return null;
+  }
+
   return (
     <GlobalContext.Provider
       value={{
         onboarded,
-        setOnboarded,
+        setAsOnboarded,
       }}
     >
       {children}
