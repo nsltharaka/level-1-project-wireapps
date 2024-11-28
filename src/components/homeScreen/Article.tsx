@@ -1,24 +1,18 @@
 import React from "react";
 import {
-  Dimensions,
   FlatList,
   Image,
   StyleSheet,
-  Text,
   View,
   type ImageSourcePropType,
   type ListRenderItem,
 } from "react-native";
 
-import {
-  colorConstants,
-  fontConstants,
-  sizeConstants,
-} from "@/theme/styleConstants";
+import ThemedView from "@/components/containers/ThemedView";
+import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
 import ProductCard from "../storeScreen/ProductCard";
-
-const { width: screenWidth } = Dimensions.get("screen");
+import { ThemedText } from "../ThemedText";
 
 type ArticleProps = {
   imageSource: ImageSourcePropType;
@@ -42,13 +36,13 @@ export default function Article({
   );
 
   return (
-    <View style={styles.container}>
+    <ThemedView style={styles.container}>
       <View style={styles.imageContainer}>
         <Image source={imageSource} style={styles.image} />
       </View>
       <View style={styles.descriptionContainer}>
-        <Text style={styles.introText}>{articleIntroText}</Text>
-        <Text style={styles.title}>{title}</Text>
+        <ThemedText style={styles.introText}>{articleIntroText}</ThemedText>
+        <ThemedText style={styles.title}>{title}</ThemedText>
       </View>
       <FlatList
         horizontal
@@ -58,13 +52,12 @@ export default function Article({
         renderItem={renderAsProducts}
         keyExtractor={(item) => item.id}
       />
-    </View>
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colorConstants.backgroundLight,
     paddingBottom: sizeConstants.paddingMedium,
   },
   imageContainer: {
@@ -86,7 +79,6 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: fontConstants.weightBold,
     fontSize: fontConstants.sizeHeaderTitle,
-    color: colorConstants.textSub,
   },
   productCardContainer: {
     width: 200,
