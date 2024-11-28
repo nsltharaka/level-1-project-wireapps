@@ -1,3 +1,4 @@
+import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
 import ListOptionButton from "@/components/storeScreen/ListOptionButton";
 import ProductCard from "@/components/storeScreen/ProductCard";
 import useDebounceSearch from "@/hooks/useDebounceSearch";
@@ -8,7 +9,6 @@ import type { Product } from "@/types/product";
 import { router, Stack } from "expo-router";
 import React from "react";
 import { FlatList, StyleSheet, View, type ListRenderItem } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StoreScreen() {
   const { setSearchKeywordWithDebounce } = useDebounceSearch();
@@ -26,7 +26,7 @@ export default function StoreScreen() {
   );
 
   return (
-    <SafeAreaView style={styles.container} edges={["left", "right"]}>
+    <ThemedSafeAreaView style={styles.container} edges={["left", "right"]}>
       <Stack.Screen
         options={{
           headerSearchBarOptions: {
@@ -64,7 +64,7 @@ export default function StoreScreen() {
           </View>
         }
       />
-    </SafeAreaView>
+    </ThemedSafeAreaView>
   );
 }
 
