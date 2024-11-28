@@ -1,3 +1,4 @@
+import ThemedScrollView from "@/components/containers/ThemedScrollView";
 import ProductCard from "@/components/storeScreen/ProductCard";
 import { useFavoritesContext } from "@/contexts/favorites/FavoritesContext";
 import { useProductContext } from "@/contexts/productList/ProductContext";
@@ -5,13 +6,7 @@ import { sizeConstants } from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useFocusEffect } from "expo-router";
 import React, { useCallback, useState } from "react";
-import {
-  Button,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Button, StyleSheet, TouchableOpacity, View } from "react-native";
 
 export default function FavoritesScreen() {
   const [editMode, setEditMode] = useState(false);
@@ -38,7 +33,7 @@ export default function FavoritesScreen() {
           ),
         }}
       />
-      <ScrollView
+      <ThemedScrollView
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior="automatic"
       >
@@ -57,7 +52,7 @@ export default function FavoritesScreen() {
             </View>
           ))}
         </View>
-      </ScrollView>
+      </ThemedScrollView>
     </>
   );
 }

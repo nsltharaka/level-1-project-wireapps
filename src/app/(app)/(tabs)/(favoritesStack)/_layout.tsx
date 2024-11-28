@@ -1,8 +1,10 @@
-import { colorConstants } from "@/theme/styleConstants";
+import { Colors } from "@/theme/Colors";
 import { Stack } from "expo-router";
 import React from "react";
+import { useColorScheme } from "react-native";
 
 export default function StoreStack() {
+  const colorScheme = useColorScheme();
   return (
     <Stack>
       <Stack.Screen
@@ -11,8 +13,11 @@ export default function StoreStack() {
           headerLargeTitle: true,
           headerShadowVisible: false,
           title: "Favorites",
-          headerLargeStyle: {
-            backgroundColor: colorConstants.backgroundDefaultIOS,
+          headerTitleStyle: {
+            color: Colors[colorScheme ?? "light"].text,
+          },
+          headerStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].background,
           },
         }}
       />

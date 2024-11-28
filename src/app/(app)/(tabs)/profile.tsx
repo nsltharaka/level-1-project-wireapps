@@ -1,23 +1,14 @@
+import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
 import ProfileOptionButton from "@/components/profileScreen/ProfileOptionButton";
-import {
-  colorConstants,
-  fontConstants,
-  sizeConstants,
-} from "@/theme/styleConstants";
+import { ThemedText } from "@/components/ThemedText";
+import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
-import {
-  Button,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Button, Image, StyleSheet, View } from "react-native";
 
 export default function ProfileScreen() {
   return (
-    <SafeAreaView style={styles.container}>
+    <ThemedSafeAreaView style={styles.container}>
       <View style={styles.profileInfoContainer}>
         <View style={styles.profileImageContainer}>
           <Image
@@ -25,16 +16,15 @@ export default function ProfileScreen() {
             source={require("@/assets/images/avatar.png")}
           />
         </View>
-        <Text style={styles.userName}>John Smith</Text>
+        <ThemedText style={styles.userName}>John Smith</ThemedText>
         <View style={styles.optionsContainer}>
           <ProfileOptionButton buttonName="Orders" icon="archive-outline" />
           <ProfileOptionButton buttonName="Pass" icon="ticket-outline" />
           <ProfileOptionButton buttonName="Events" icon="calendar-outline" />
-          <ProfileOptionButton buttonName="Settings" icon="settings-outline" />
         </View>
       </View>
       <Button title="clear async storage" onPress={clearAsyncStorage} />
-    </SafeAreaView>
+    </ThemedSafeAreaView>
   );
 }
 
@@ -45,7 +35,6 @@ const clearAsyncStorage = async () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colorConstants.white,
   },
   profileInfoContainer: {
     alignItems: "center",
