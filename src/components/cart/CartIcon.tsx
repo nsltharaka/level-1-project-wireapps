@@ -1,9 +1,9 @@
 import { useCartContext } from "@/contexts/cartContext/CartContext";
 import { colorConstants, fontConstants } from "@/theme/styleConstants";
-import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ThemedIcon } from "../ThemedIcon";
 
 export default function CartIcon() {
   const [cart] = useCartContext();
@@ -21,12 +21,7 @@ export default function CartIcon() {
       style={styles.container}
       onPress={() => router.push("/(modals)/cart")}
     >
-      <Ionicons
-        name="cart-outline"
-        size={28}
-        color={"#000"}
-        style={styles.icon}
-      />
+      <ThemedIcon name="cart-outline" size={28} style={styles.icon} />
       {label && (
         <View style={styles.labelWrapper}>
           <Text style={styles.label}>{label}</Text>

@@ -3,6 +3,8 @@ import { createContext, useContext } from "react";
 type GlobalContext = {
   onboarded: boolean;
   setAsOnboarded: () => Promise<void>;
+  isDarkTheme: boolean;
+  toggleDarkTheme: () => void;
 };
 
 export const GlobalContext = createContext<GlobalContext | undefined>(

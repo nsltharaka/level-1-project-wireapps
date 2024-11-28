@@ -1,12 +1,15 @@
 import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
 import ProfileOptionButton from "@/components/profileScreen/ProfileOptionButton";
 import { ThemedText } from "@/components/ThemedText";
+import { useGlobalContext } from "@/contexts/GlobalContext";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import { Button, Image, StyleSheet, View } from "react-native";
 
 export default function ProfileScreen() {
+  const { isDarkTheme, toggleDarkTheme } = useGlobalContext();
+
   return (
     <ThemedSafeAreaView style={styles.container}>
       <View style={styles.profileInfoContainer}>
@@ -24,6 +27,7 @@ export default function ProfileScreen() {
         </View>
       </View>
       <Button title="clear async storage" onPress={clearAsyncStorage} />
+      {/* <Switch value={isDarkTheme} onValueChange={toggleDarkTheme} /> */}
     </ThemedSafeAreaView>
   );
 }

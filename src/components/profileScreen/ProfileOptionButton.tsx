@@ -1,9 +1,8 @@
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import React, { type ComponentProps } from "react";
-import { StyleSheet } from "react-native";
-import ThemedView from "../containers/ThemedView";
+import { StyleSheet, View } from "react-native";
+import { ThemedIcon } from "../ThemedIcon";
 import { ThemedText } from "../ThemedText";
 
 type ProfileOptionButtonProps = {
@@ -15,12 +14,11 @@ export default function ProfileOptionButton({
   buttonName,
   icon,
 }: ProfileOptionButtonProps) {
-  const iconColor = useThemeColor({ dark: "#fff", light: "#000" }, "tint");
   return (
-    <ThemedView style={styles.container}>
-      <Ionicons name={icon} size={28} color={iconColor} />
+    <View style={styles.container}>
+      <ThemedIcon name={icon} size={28} />
       <ThemedText style={styles.buttonName}>{buttonName}</ThemedText>
-    </ThemedView>
+    </View>
   );
 }
 

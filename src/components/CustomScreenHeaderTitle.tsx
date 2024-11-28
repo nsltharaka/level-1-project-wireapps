@@ -1,7 +1,6 @@
-import ThemedView from "@/components/containers/ThemedView";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { ThemedText } from "./ThemedText";
 
 type Props = {
@@ -11,10 +10,10 @@ type Props = {
 
 export default function CustomScreenHeaderTitle({ title, subTitle }: Props) {
   return (
-    <ThemedView style={styles.titleContainer}>
+    <View style={styles.titleContainer}>
       <ThemedText style={styles.screenTitle}>{title}</ThemedText>
       <ThemedText style={styles.screenSubTitle}>{subTitle ?? ""}</ThemedText>
-    </ThemedView>
+    </View>
   );
 }
 

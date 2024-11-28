@@ -1,3 +1,4 @@
+import ThemedView from "@/components/containers/ThemedView";
 import { useProductListContext } from "@/contexts/productList/ProductListContext";
 import type { DefaultMapper } from "@/hooks/useSortedProducts";
 import {
@@ -11,7 +12,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function FilterBottomSheet() {
-  const { selectedSortStrategy, setSortStrategy } = useProductListContext();
+  const { setSortStrategy } = useProductListContext();
 
   const setStrategy = (strategy: DefaultMapper) => {
     setSortStrategy(strategy);
@@ -20,7 +21,7 @@ export default function FilterBottomSheet() {
 
   return (
     <View style={styles.modalContainer}>
-      <View style={styles.modal}>
+      <ThemedView style={styles.modal}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Sort by</Text>
           <Ionicons
@@ -48,7 +49,7 @@ export default function FilterBottomSheet() {
             price high to low
           </Text>
         </View>
-      </View>
+      </ThemedView>
     </View>
   );
 }
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     height: "30%",
-    backgroundColor: colorConstants.backgroundLight,
+    // backgroundColor: colorConstants.backgroundLight,
     borderTopRightRadius: sizeConstants.borderRadiusDefault,
     borderTopLeftRadius: sizeConstants.borderRadiusDefault,
   },
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     paddingLeft: sizeConstants.paddingLarge,
     paddingRight: sizeConstants.paddingSmall,
     borderBottomWidth: sizeConstants.widthHairLine,
-    borderBottomColor: colorConstants.backgroundDimmed,
+    borderBottomColor: "grey",
   },
   title: {
     fontWeight: fontConstants.weightBold,

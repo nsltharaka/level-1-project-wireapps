@@ -4,6 +4,8 @@ import FavoritesContextProvider from "@/contexts/favorites/FavoritesContext";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 import ProductContextProvider from "@/contexts/productList/ProductContext";
 import ProductListContextProvider from "@/contexts/productList/ProductListContext";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { Colors } from "@/theme/Colors";
 import { Redirect, Stack } from "expo-router";
 
 export default function AppLayout() {
@@ -27,6 +29,8 @@ export default function AppLayout() {
 }
 
 function AppStack() {
+  const colorScheme = useColorScheme();
+
   return (
     <Stack>
       <Stack.Screen
@@ -38,11 +42,29 @@ function AppStack() {
       />
       <Stack.Screen
         name="product/[id]"
-        options={{ title: "Product Details", headerRight: () => <CartIcon /> }}
+        options={{
+          title: "Product Details",
+          headerStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].baseBackground,
+          },
+          headerTitleStyle: {
+            color: Colors[colorScheme ?? "light"].text,
+          },
+          headerRight: () => <CartIcon />,
+        }}
       />
       <Stack.Screen
         name="(modals)/cart"
-        options={{ title: "Cart", presentation: "modal" }}
+        options={{
+          title: "Cart",
+          presentation: "modal",
+          headerStyle: {
+            backgroundColor: Colors[colorScheme ?? "light"].baseBackground,
+          },
+          headerTitleStyle: {
+            color: Colors[colorScheme ?? "light"].text,
+          },
+        }}
       />
       <Stack.Screen
         name="(modals)/filterBottomSheet"

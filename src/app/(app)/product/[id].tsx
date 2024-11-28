@@ -1,12 +1,14 @@
 import AddToCartButton from "@/components/AddToCartButton";
+import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { ThemedText } from "@/components/ThemedText";
 import { useCartContext } from "@/contexts/cartContext/CartContext";
 import { getProductById } from "@/services/productService";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, Text } from "react-native";
+import { Image, StyleSheet } from "react-native";
 
 export default function ProductDetailsScreen() {
   const params = useLocalSearchParams<{ id: string }>();
@@ -24,7 +26,7 @@ export default function ProductDetailsScreen() {
   if (!selectedProduct) return null;
 
   return (
-    <>
+    <ThemedSafeAreaView style={{ flex: 1 }} edges={["bottom", "left", "right"]}>
       <ParallaxScrollView
         headerImage={
           <Image
@@ -33,12 +35,16 @@ export default function ProductDetailsScreen() {
           />
         }
       >
-        <Text style={styles.itemName}>{selectedProduct.name}</Text>
-        <Text style={styles.itemPrice}>$ {selectedProduct.price}</Text>
-        <Text style={styles.itemColor}>{selectedProduct.colour}</Text>
-        <Text style={styles.itemDescription}>
+        <ThemedText style={styles.itemName}>{selectedProduct.name}</ThemedText>
+        <ThemedText style={styles.itemPrice}>
+          $ {selectedProduct.price}
+        </ThemedText>
+        <ThemedText style={styles.itemColor}>
+          {selectedProduct.colour}
+        </ThemedText>
+        <ThemedText style={styles.itemDescription}>
           {selectedProduct.description}
-        </Text>
+        </ThemedText>
       </ParallaxScrollView>
       <AddToCartButton
         onPress={() => {
@@ -49,7 +55,7 @@ export default function ProductDetailsScreen() {
           router.push("/(modals)/cart");
         }}
       />
-    </>
+    </ThemedSafeAreaView>
   );
 }
 
@@ -57,7 +63,7 @@ const styles = StyleSheet.create({
   image: {
     width: sizeConstants.widthFullScreen,
     height: "100%",
-    objectFit: "contain",
+    objectFit: "cover",
     bottom: 0,
     left: 0,
     position: "absolute",

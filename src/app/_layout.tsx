@@ -9,6 +9,9 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const { loaded, data, error, setValue } = useAsyncStorage("@onboarded");
   const [onboarded, setOnboarded] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  const toggleDarkTheme = () => setIsDarkTheme((prev) => !prev);
 
   const setAsOnboarded = async () => {
     setValue("1");
@@ -35,6 +38,8 @@ export default function RootLayout() {
       value={{
         onboarded,
         setAsOnboarded,
+        isDarkTheme,
+        toggleDarkTheme,
       }}
     >
       <Slot />

@@ -1,6 +1,7 @@
+import { ThemedText } from "@/components/ThemedText";
 import { colorConstants, fontConstants } from "@/theme/styleConstants";
 import React from "react";
-import { StyleSheet, Text, type TextProps } from "react-native";
+import { StyleSheet, type TextProps } from "react-native";
 
 type Props = TextProps & {
   selected?: boolean;
@@ -13,12 +14,12 @@ export default function SelectableOption({
   children,
 }: Props) {
   return (
-    <Text
+    <ThemedText
       style={[styles.default, selected && styles.selectedText]}
       onPress={onPress}
     >
       {children}
-    </Text>
+    </ThemedText>
   );
 }
 

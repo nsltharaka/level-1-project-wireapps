@@ -8,7 +8,6 @@ import {
   type ListRenderItem,
 } from "react-native";
 
-import ThemedView from "@/components/containers/ThemedView";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
 import ProductCard from "../storeScreen/ProductCard";
@@ -36,7 +35,7 @@ export default function Article({
   );
 
   return (
-    <ThemedView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image source={imageSource} style={styles.image} />
       </View>
@@ -52,7 +51,7 @@ export default function Article({
         renderItem={renderAsProducts}
         keyExtractor={(item) => item.id}
       />
-    </ThemedView>
+    </View>
   );
 }
 

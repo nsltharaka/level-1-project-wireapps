@@ -7,7 +7,7 @@ import useSortedProducts from "@/hooks/useSortedProducts";
 import { sizeConstants } from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
 import { router, Stack } from "expo-router";
-import React from "react";
+import React, { useMemo } from "react";
 import { FlatList, StyleSheet, View, type ListRenderItem } from "react-native";
 
 export default function StoreScreen() {
@@ -15,14 +15,20 @@ export default function StoreScreen() {
   const { filteredProducts } = useFilteredProducts();
   const { products, activeMapper } = useSortedProducts(filteredProducts);
 
-  const renderAsProducts: ListRenderItem<Product> = ({ item }) => (
-    <View style={styles.productCardContainer} key={item.id}>
-      <ProductCard item={item}>
-        <ProductCard.Color />
-        <ProductCard.Price />
-        <ProductCard.FavoriteButton />
-      </ProductCard>
-    </View>
+  const renderAsProducts: ListRenderItem<Product> = useMemo(
+    () =>
+      ({ item }) => {
+        return (
+          <View style={styles.productCardContainer} key={item.id}>
+            <ProductCard item={item}>
+              <ProductCard.Color />
+              <ProductCard.Price />
+              <ProductCard.FavoriteButton />
+            </ProductCard>
+          </View>
+        );
+      },
+    [],
   );
 
   return (
@@ -30,7 +36,7 @@ export default function StoreScreen() {
       <Stack.Screen
         options={{
           headerSearchBarOptions: {
-            headerIconColor: "#000",
+            placeholder: "search",
             onCancelButtonPress: () => setSearchKeywordWithDebounce(""), // for ios
             onClose: () => setSearchKeywordWithDebounce(""), // for android
             onChangeText: ({ nativeEvent: { text } }) =>
@@ -79,10 +85,11 @@ const styles = StyleSheet.create({
   listOptionsContainer: {
     flexDirection: "row",
     gap: sizeConstants.flexGapMedium,
+    marginBottom: sizeConstants.marginMedium,
   },
   contentContainer: {
     gap: sizeConstants.flexGapMedium,
-    paddingVertical: sizeConstants.paddingMedium,
+    paddingBottom: sizeConstants.paddingMedium,
   },
   columnWrapper: {
     gap: sizeConstants.flexGapMedium,

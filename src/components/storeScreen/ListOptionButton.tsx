@@ -1,7 +1,10 @@
-import { colorConstants, sizeConstants } from "@/theme/styleConstants";
+import { sizeConstants } from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import React, { type ComponentProps } from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
+import ThemedTouchableOpacity from "../containers/ThemedTouchableOpacity";
+import { ThemedIcon } from "../ThemedIcon";
+import { ThemedText } from "../ThemedText";
 
 type Props = {
   onPress: () => void;
@@ -17,10 +20,10 @@ export default function ListOptionButton({
   onPress,
 }: Props) {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Ionicons name={icon} color={"black"} size={iconSize} />
-      <Text>{label}</Text>
-    </TouchableOpacity>
+    <ThemedTouchableOpacity onPress={onPress} style={styles.container}>
+      <ThemedIcon name={icon} size={iconSize} />
+      <ThemedText>{label}</ThemedText>
+    </ThemedTouchableOpacity>
   );
 }
 
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     gap: sizeConstants.flexGapMedium,
-    backgroundColor: colorConstants.backgroundLight,
+    // backgroundColor: "lightgreen",
     padding: sizeConstants.paddingMedium,
     paddingHorizontal: sizeConstants.paddingMedium,
     borderRadius: 100,

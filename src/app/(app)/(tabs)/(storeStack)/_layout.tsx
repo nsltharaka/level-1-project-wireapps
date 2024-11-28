@@ -1,8 +1,8 @@
 import CartIcon from "@/components/cart/CartIcon";
+import { useColorScheme } from "@/hooks/useColorScheme";
 import { Colors } from "@/theme/Colors";
 import { Stack } from "expo-router";
 import React from "react";
-import { useColorScheme } from "react-native";
 
 export default function StoreStack() {
   const colorScheme = useColorScheme();
@@ -15,7 +15,7 @@ export default function StoreStack() {
           headerShadowVisible: false,
           headerLargeTitle: true,
           headerStyle: {
-            backgroundColor: Colors[colorScheme ?? "light"].background,
+            backgroundColor: Colors[colorScheme ?? "light"].baseBackground,
           },
           headerTitleStyle: {
             color: Colors[colorScheme ?? "light"].text,

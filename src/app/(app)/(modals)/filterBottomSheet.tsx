@@ -1,4 +1,7 @@
 import SelectableOption from "@/components/bottomSheets/filter/SelectableOption";
+import ThemedView from "@/components/containers/ThemedView";
+import { ThemedIcon } from "@/components/ThemedIcon";
+import { ThemedText } from "@/components/ThemedText";
 import {
   brands,
   colors,
@@ -9,7 +12,6 @@ import {
   fontConstants,
   sizeConstants,
 } from "@/theme/styleConstants";
-import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -52,12 +54,11 @@ export default function FilterBottomSheet() {
 
   return (
     <View style={styles.modalContainer}>
-      <View style={styles.modal}>
+      <ThemedView style={styles.modal}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Filters</Text>
-          <Ionicons
+          <ThemedText style={styles.title}>Filters</ThemedText>
+          <ThemedIcon
             name="close-outline"
-            color={"grey"}
             size={28}
             onPress={() => router.back()}
           />
@@ -66,7 +67,7 @@ export default function FilterBottomSheet() {
         <View style={styles.content}>
           <View style={styles.filterContainer}>
             <View style={styles.optionRow}>
-              <Text style={styles.optionTitle}>Brand :</Text>
+              <ThemedText style={styles.optionTitle}>Brand :</ThemedText>
               {brands.map((brandName, index) => (
                 <SelectableOption
                   key={index}
@@ -78,7 +79,7 @@ export default function FilterBottomSheet() {
               ))}
             </View>
             <View style={styles.optionRow}>
-              <Text style={styles.optionTitle}>Color :</Text>
+              <ThemedText style={styles.optionTitle}>Color :</ThemedText>
               {colors.map((colorName, index) => (
                 <SelectableOption
                   key={index}
@@ -90,9 +91,9 @@ export default function FilterBottomSheet() {
               ))}
             </View>
             <View style={styles.optionRow}>
-              <Text style={styles.optionTitle}>Price :</Text>
+              <ThemedText style={styles.optionTitle}>Price :</ThemedText>
               <View style={[styles.optionRow, { gap: 10 }]}>
-                <Text>From</Text>
+                <ThemedText>From</ThemedText>
                 <TextInput
                   keyboardType="number-pad"
                   defaultValue={selectedFilters.priceRange[0].toString()}
@@ -102,7 +103,7 @@ export default function FilterBottomSheet() {
                   }
                   style={styles.optionTextInput}
                 />
-                <Text>To</Text>
+                <ThemedText>To</ThemedText>
                 <TextInput
                   keyboardType="number-pad"
                   defaultValue={selectedFilters.priceRange[1].toString()}
@@ -137,7 +138,7 @@ export default function FilterBottomSheet() {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </ThemedView>
     </View>
   );
 }
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     height: "50%",
-    backgroundColor: colorConstants.backgroundLight,
+    // backgroundColor: colorConstants.backgroundLight,
     borderTopRightRadius: sizeConstants.borderRadiusDefault,
     borderTopLeftRadius: sizeConstants.borderRadiusDefault,
   },
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
     paddingLeft: sizeConstants.paddingLarge,
     paddingRight: sizeConstants.paddingSmall,
     borderBottomWidth: sizeConstants.widthHairLine,
-    borderBottomColor: colorConstants.backgroundDimmed,
+    borderBottomColor: "grey",
   },
   title: {
     fontWeight: fontConstants.weightBold,

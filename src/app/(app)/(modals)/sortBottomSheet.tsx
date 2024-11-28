@@ -1,9 +1,11 @@
+import ThemedView from "@/components/containers/ThemedView";
+import { ThemedIcon } from "@/components/ThemedIcon";
+import { ThemedText } from "@/components/ThemedText";
 import { useProductListContext } from "@/contexts/productList/ProductListContext";
 import type { DefaultMapper } from "@/hooks/useSortedProducts";
-import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, View } from "react-native";
 
 export default function FilterBottomSheet() {
   const { setSortStrategy } = useProductListContext();
@@ -15,12 +17,11 @@ export default function FilterBottomSheet() {
 
   return (
     <View style={styles.modalContainer}>
-      <View style={styles.modal}>
+      <ThemedView style={styles.modal}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Sort by</Text>
-          <Ionicons
+          <ThemedText style={styles.title}>Sort by</ThemedText>
+          <ThemedIcon
             name="close-outline"
-            color={"grey"}
             size={28}
             onPress={() => router.back()}
           />
@@ -37,7 +38,7 @@ export default function FilterBottomSheet() {
             onPress={() => setStrategy("price high to low")}
           />
         </View>
-      </View>
+      </ThemedView>
     </View>
   );
 }
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     height: "30%",
-    backgroundColor: "white",
+    // backgroundColor: "white",
     borderTopRightRadius: 18,
     borderTopLeftRadius: 18,
   },

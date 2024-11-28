@@ -1,18 +1,18 @@
 import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
-import ThemedScrollView from "@/components/containers/ThemedScrollView";
 import CustomScreenHeaderTitle from "@/components/CustomScreenHeaderTitle";
 import Article from "@/components/homeScreen/Article";
 import { useProductContext } from "@/contexts/productList/ProductContext";
 import { defaultFilters } from "@/hooks/useFilteredProducts";
 import { formatDate } from "@/utils/dates";
 import React from "react";
+import { ScrollView } from "react-native";
 
 export default function HomeScreen() {
   const { products } = useProductContext();
 
   return (
     <ThemedSafeAreaView edges={["top", "left", "right"]}>
-      <ThemedScrollView contentInsetAdjustmentBehavior="automatic">
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
         <CustomScreenHeaderTitle
           title="Discover"
           subTitle={formatDate(new Date())}
@@ -33,7 +33,7 @@ export default function HomeScreen() {
             .filter(defaultFilters.withBrand("Puma"))
             .slice(0, 3)}
         />
-      </ThemedScrollView>
+      </ScrollView>
     </ThemedSafeAreaView>
   );
 }
