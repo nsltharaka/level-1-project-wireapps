@@ -1,3 +1,4 @@
+import ActionButton from "@/components/ActionButton";
 import SelectableOption from "@/components/bottomSheets/filter/SelectableOption";
 import ThemedView from "@/components/containers/ThemedView";
 import { ThemedIcon } from "@/components/ThemedIcon";
@@ -14,13 +15,7 @@ import {
 } from "@/theme/styleConstants";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 
 export default function FilterBottomSheet() {
   const { selectedFilters, setFilters } = useProductListContext();
@@ -117,25 +112,17 @@ export default function FilterBottomSheet() {
             </View>
           </View>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.actionButton} onPress={onApply}>
-              <Text style={styles.actionButtonText}>Apply filters</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            <ActionButton
+              title="Apply filters"
+              onPress={onApply}
+              style={styles.actionButton}
+            />
+            <ActionButton
+              title="Clear all filters"
               onPress={onClear}
-              style={[
-                styles.actionButton,
-                { backgroundColor: colorConstants.white },
-              ]}
-            >
-              <Text
-                style={[
-                  styles.actionButtonText,
-                  { color: colorConstants.black },
-                ]}
-              >
-                Clear all filters
-              </Text>
-            </TouchableOpacity>
+              style={styles.actionButton}
+              type="secondary"
+            />
           </View>
         </View>
       </ThemedView>
@@ -196,12 +183,8 @@ const styles = StyleSheet.create({
     gap: sizeConstants.flexGapMedium,
   },
   actionButton: {
-    backgroundColor: colorConstants.backgroundDark,
-    justifyContent: "center",
-    alignItems: "center",
     paddingVertical: sizeConstants.paddingMedium,
     borderRadius: 10,
-    borderWidth: 1,
   },
   actionButtonText: {
     color: colorConstants.white,

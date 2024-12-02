@@ -1,4 +1,4 @@
-import AddToCartButton from "@/components/AddToCartButton";
+import ActionButton from "@/components/ActionButton";
 import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -46,7 +46,11 @@ export default function ProductDetailsScreen() {
           {selectedProduct.description}
         </ThemedText>
       </ParallaxScrollView>
-      <AddToCartButton
+      <ActionButton
+        title="Add to cart"
+        iconProps={{ name: "cart", size: 24 }}
+        style={styles.actionButton}
+        textStyles={styles.actionButtonText}
         onPress={() => {
           dispatch({
             type: "addItem",
@@ -75,4 +79,14 @@ const styles = StyleSheet.create({
   itemPrice: {},
   itemColor: {},
   itemDescription: {},
+  actionButton: {
+    paddingVertical: sizeConstants.paddingLarge,
+    position: "absolute",
+    bottom: 50,
+    width: "90%",
+    alignSelf: "center",
+  },
+  actionButtonText: {
+    fontSize: fontConstants.sizeMedium,
+  },
 });
