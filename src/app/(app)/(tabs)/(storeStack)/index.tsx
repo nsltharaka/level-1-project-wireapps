@@ -23,7 +23,6 @@ export default function StoreScreen() {
             <ProductCard item={item}>
               <ProductCard.Color />
               <ProductCard.Price />
-              <ProductCard.FavoriteButton />
             </ProductCard>
           </View>
         );

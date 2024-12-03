@@ -13,7 +13,7 @@ export const Colors = {
   },
   dark: {
     text: "#fff",
-    background: "rgb(58,58,60)",
+    background: "rgb(44,44,46)",
     baseBackground: "rgb(28,28,30)",
     tint: tintColorDark,
     icon: "#fff",

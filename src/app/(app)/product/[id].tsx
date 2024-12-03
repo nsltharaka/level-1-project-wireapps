@@ -3,6 +3,7 @@ import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { useCartContext } from "@/contexts/cartContext/CartContext";
+import { useFavoritesContext } from "@/contexts/favorites/FavoritesContext";
 import { getProductById } from "@/services/productService";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
@@ -19,11 +20,16 @@ export default function ProductDetailsScreen() {
   const [_, dispatch] = useCartContext();
   const router = useRouter();
 
+  const { isInFavorites, removeFromFavorites, addToFavorites } =
+    useFavoritesContext();
+
   useEffect(() => {
     setSelectedProduct(getProductById(params.id));
   }, []);
 
   if (!selectedProduct) return null;
+
+  const isItemFavorite = isInFavorites(selectedProduct.id);
 
   return (
     <ThemedSafeAreaView style={{ flex: 1 }} edges={["bottom", "left", "right"]}>
@@ -42,6 +48,19 @@ export default function ProductDetailsScreen() {
         <ThemedText style={styles.itemColor}>
           {selectedProduct.colour}
         </ThemedText>
+        <ActionButton
+          title={isItemFavorite ? "Remove from favorites" : "Add to favorites"}
+          onPress={() =>
+            isItemFavorite
+              ? removeFromFavorites(selectedProduct.id)
+              : addToFavorites(selectedProduct.id)
+          }
+          type="secondary"
+          iconProps={{
+            name: isItemFavorite ? "star" : "star-outline",
+            size: 24,
+          }}
+        />
         <ThemedText style={styles.itemDescription}>
           {selectedProduct.description}
         </ThemedText>
