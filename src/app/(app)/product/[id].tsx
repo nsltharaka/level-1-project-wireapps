@@ -49,6 +49,7 @@ export default function ProductDetailsScreen() {
           {selectedProduct.colour}
         </ThemedText>
         <ActionButton
+          style={styles.favoritesButton}
           title={isItemFavorite ? "Remove from favorites" : "Add to favorites"}
           onPress={() =>
             isItemFavorite
@@ -58,7 +59,7 @@ export default function ProductDetailsScreen() {
           type="secondary"
           iconProps={{
             name: isItemFavorite ? "star" : "star-outline",
-            size: 24,
+            size: 20,
           }}
         />
         <ThemedText style={styles.itemDescription}>
@@ -67,7 +68,7 @@ export default function ProductDetailsScreen() {
       </ParallaxScrollView>
       <ActionButton
         title="Add to cart"
-        iconProps={{ name: "cart", size: 24 }}
+        iconProps={{ name: "cart", size: 30 }}
         style={styles.actionButton}
         textStyles={styles.actionButtonText}
         onPress={() => {
@@ -98,6 +99,9 @@ const styles = StyleSheet.create({
   itemPrice: {},
   itemColor: {},
   itemDescription: {},
+  favoritesButton: {
+    paddingVertical: sizeConstants.paddingSmall,
+  },
   actionButton: {
     paddingVertical: sizeConstants.paddingLarge,
     position: "absolute",
