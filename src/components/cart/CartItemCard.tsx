@@ -7,7 +7,11 @@ import {
 import type { CartItem } from "@/types/cartItem";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import ThemedTouchableOpacity from "../containers/ThemedTouchableOpacity";
+import ThemedView from "../containers/ThemedView";
+import { ThemedIcon } from "../ThemedIcon";
+import { ThemedText } from "../ThemedText";
 
 type Props = {
   item: CartItem;
@@ -17,20 +21,20 @@ export default function CartItemCard({ item }: Props) {
   const [_, dispatch] = useCartContext();
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.imageContainer}>
+    <ThemedView lightColor={colorConstants.white} style={styles.container}>
+      <View style={styles.imageContainer}>
         <Image source={{ uri: item.mainImage }} style={styles.image} />
-      </TouchableOpacity>
+      </View>
 
       <View style={styles.descriptionContainer}>
-        <Text numberOfLines={2} style={styles.itemName}>
+        <ThemedText numberOfLines={2} style={styles.itemName}>
           {item.name}
-        </Text>
-        <Text>color : {item.colour}</Text>
-        <Text>$ {item.price}</Text>
+        </ThemedText>
+        <ThemedText>color : {item.colour}</ThemedText>
+        <ThemedText>$ {item.price}</ThemedText>
 
         <View style={styles.quantityAdjuster}>
-          <TouchableOpacity
+          <ThemedTouchableOpacity
             style={styles.adjustButton}
             onPress={() =>
               dispatch({
@@ -39,10 +43,10 @@ export default function CartItemCard({ item }: Props) {
               })
             }
           >
-            <Ionicons name="remove" size={22} />
-          </TouchableOpacity>
-          <Text>{item.quantity}</Text>
-          <TouchableOpacity
+            <ThemedIcon name="remove" size={22} />
+          </ThemedTouchableOpacity>
+          <ThemedText>{item.quantity}</ThemedText>
+          <ThemedTouchableOpacity
             style={styles.adjustButton}
             onPress={() =>
               dispatch({
@@ -51,8 +55,8 @@ export default function CartItemCard({ item }: Props) {
               })
             }
           >
-            <Ionicons name="add" size={22} />
-          </TouchableOpacity>
+            <ThemedIcon name="add" size={22} />
+          </ThemedTouchableOpacity>
         </View>
       </View>
 
@@ -60,9 +64,11 @@ export default function CartItemCard({ item }: Props) {
         style={{ alignSelf: "flex-start" }}
         onPress={() => dispatch({ type: "removeItem", data: item.id })}
       >
-        <Ionicons name="close-circle" size={28} color={"gray"} />
+        <View style={styles.actionButtonContainer}>
+          <Ionicons name="close-circle" size={28} color={"gray"} />
+        </View>
       </TouchableOpacity>
-    </View>
+    </ThemedView>
   );
 }
 
@@ -76,17 +82,21 @@ const styles = StyleSheet.create({
     borderWidth: sizeConstants.widthHairLine,
     borderRadius: sizeConstants.borderRadiusDefault,
     borderColor: colorConstants.backgroundDimmed,
-    padding: sizeConstants.paddingSmall,
-    backgroundColor: colorConstants.white,
   },
   imageContainer: {
-    width: 100,
+    width: 120,
     height: "100%",
+    padding: sizeConstants.paddingSmall,
+    backgroundColor: colorConstants.white,
+    borderTopLeftRadius: sizeConstants.borderRadiusDefault,
+    borderBottomLeftRadius: sizeConstants.borderRadiusDefault,
   },
   image: {
     width: sizeConstants.widthFullScreen,
     height: "100%",
     objectFit: "contain",
+    borderTopLeftRadius: sizeConstants.borderRadiusDefault,
+    borderBottomLeftRadius: sizeConstants.borderRadiusDefault,
   },
   itemName: {
     fontWeight: fontConstants.weightBold,
@@ -96,6 +106,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: "100%",
     gap: sizeConstants.flexGapMedium,
+    padding: sizeConstants.paddingSmall,
   },
   quantityAdjuster: {
     flexDirection: "row",
@@ -107,5 +118,8 @@ const styles = StyleSheet.create({
     borderWidth: sizeConstants.widthHairLine,
     borderRadius: 100,
     padding: 2,
+  },
+  actionButtonContainer: {
+    padding: sizeConstants.paddingSmall,
   },
 });
