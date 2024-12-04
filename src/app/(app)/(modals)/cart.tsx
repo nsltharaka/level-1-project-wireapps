@@ -1,11 +1,12 @@
+import ActionButton from "@/components/ActionButton";
 import CartItemCard from "@/components/cart/CartItemCard";
 import ThemedView from "@/components/containers/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import { useCartContext } from "@/contexts/cartContext/CartContext";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
-import React, { useCallback, useMemo } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { memo, useCallback } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
 
 export default function Cart() {
   const [cart] = useCartContext();
@@ -23,14 +24,11 @@ export default function Cart() {
     [cart],
   );
 
-  const EmptyComponent = useMemo(
-    () => (
-      <View style={styles.emptyComponent}>
-        <Text>Your cart is empty.</Text>
-      </View>
-    ),
-    [],
-  );
+  const EmptyComponent = memo(() => (
+    <View style={styles.emptyComponent}>
+      <ThemedText>Your cart is empty.</ThemedText>
+    </View>
+  ));
 
   return (
     <ThemedView style={[{ backgroundColor }, styles.flatListContainer]}>
@@ -40,6 +38,16 @@ export default function Cart() {
         renderItem={({ item }) => <CartItemCard item={item} />}
         ListFooterComponent={FooterComponent}
         ListEmptyComponent={EmptyComponent}
+      />
+      <ActionButton
+        title="Checkout"
+        textStyles={styles.actionButtonText}
+        onPress={() => {}}
+        style={styles.actionButton}
+        iconProps={{
+          name: "bag-check",
+          size: 30,
+        }}
       />
     </ThemedView>
   );
@@ -54,6 +62,7 @@ const styles = StyleSheet.create({
   cartDescription: {
     marginTop: sizeConstants.marginLarge,
     paddingHorizontal: sizeConstants.paddingLarge,
+    marginBottom: 200,
   },
   totalAmount: {
     fontWeight: fontConstants.weightBold,
@@ -63,5 +72,15 @@ const styles = StyleSheet.create({
   emptyComponent: {
     height: "100%",
     justifyContent: "center",
+  },
+  actionButton: {
+    position: "absolute",
+    width: "90%",
+    alignSelf: "center",
+    bottom: 50,
+    paddingVertical: sizeConstants.paddingLarge,
+  },
+  actionButtonText: {
+    fontSize: fontConstants.sizeMedium,
   },
 });
