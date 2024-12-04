@@ -1,6 +1,6 @@
 import ActionButton from "@/components/ActionButton";
+import ParallaxScrollView from "@/components/containers/ParallaxScrollView";
 import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { useCartContext } from "@/contexts/cartContext/CartContext";
 import { useFavoritesContext } from "@/contexts/favorites/FavoritesContext";
