@@ -1,6 +1,5 @@
 import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
 import ProfileOptionButton from "@/components/profileScreen/ProfileOptionButton";
-import SettingOption from "@/components/profileScreen/SettingOption";
 import { ThemedText } from "@/components/ThemedText";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
@@ -27,9 +26,9 @@ export default function ProfileScreen() {
           <ProfileOptionButton buttonName="Events" icon="calendar-outline" />
         </View>
       </View>
-      <Button title="clear async storage" onPress={clearAsyncStorage} />
       <View style={styles.settingsPanel}>
-        <SettingOption title="Dark mode" onPress={() => {}} />
+        {/* <SettingOption title="Dark mode" onPress={() => {}} /> */}
+        <Button title="clear async storage" onPress={clearAsyncStorage} />
       </View>
     </ThemedSafeAreaView>
   );

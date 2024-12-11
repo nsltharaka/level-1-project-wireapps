@@ -96,7 +96,7 @@ export default function FilterBottomSheet() {
                   onChangeText={(text) =>
                     setPriceRange((prev) => [Number.parseFloat(text), prev[1]])
                   }
-                  style={styles.optionTextInput}
+                  style={[styles.optionTextInput]}
                 />
                 <ThemedText>To</ThemedText>
                 <TextInput
@@ -106,7 +106,7 @@ export default function FilterBottomSheet() {
                   onChangeText={(text) =>
                     setPriceRange((prev) => [prev[0], Number.parseFloat(text)])
                   }
-                  style={styles.optionTextInput}
+                  style={[styles.optionTextInput]}
                 />
               </View>
             </View>
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     fontWeight: fontConstants.weightBold,
   },
   optionTextInput: {
-    backgroundColor: colorConstants.backgroundDefaultIOS,
+    backgroundColor: "gainsboro",
     width: 70,
     padding: 7,
     borderRadius: 8,
