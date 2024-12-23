@@ -30,8 +30,8 @@ export default function ProfileScreen() {
       <View style={styles.settingsPanel}>
         <SettingOption
           title="Dark mode"
-          selectedOptionText={"same as system"}
-          onPress={() => {}}
+          value={isDarkTheme}
+          onToggle={toggleDarkTheme}
         />
         <Button title="clear async storage" onPress={clearAsyncStorage} />
       </View>

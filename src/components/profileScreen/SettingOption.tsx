@@ -1,30 +1,26 @@
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { ThemedIcon } from "../ThemedIcon";
+import { StyleSheet, Switch, View } from "react-native";
 import { ThemedText } from "../ThemedText";
 
 type Props = {
   title: string;
-  selectedOptionText: string;
-  onPress: () => void;
+  value: boolean;
+  onToggle: () => void;
 };
 
-export default function SettingOption({
-  title,
-  selectedOptionText,
-  onPress,
-}: Props) {
+export default function SettingOption({ title, value, onToggle }: Props) {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <View style={styles.container}>
       <ThemedText style={styles.titleText}>{title}</ThemedText>
-      <View style={styles.selectedOptionContainer}>
+      <Switch value={value} onChange={onToggle} />
+      {/* <View style={styles.selectedOptionContainer}>
         <ThemedText style={styles.selectedOptionText}>
           {selectedOptionText}
         </ThemedText>
         <ThemedIcon name="chevron-forward-sharp" size={22} color={"grey"} />
-      </View>
-    </TouchableOpacity>
+      </View> */}
+    </View>
   );
 }
 
