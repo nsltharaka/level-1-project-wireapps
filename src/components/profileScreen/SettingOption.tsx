@@ -6,16 +6,21 @@ import { ThemedText } from "../ThemedText";
 
 type Props = {
   title: string;
+  selectedOptionText: string;
   onPress: () => void;
 };
 
-export default function SettingOption({ title, onPress }: Props) {
+export default function SettingOption({
+  title,
+  selectedOptionText,
+  onPress,
+}: Props) {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <ThemedText style={styles.titleText}>{title}</ThemedText>
       <View style={styles.selectedOptionContainer}>
         <ThemedText style={styles.selectedOptionText}>
-          Same as system
+          {selectedOptionText}
         </ThemedText>
         <ThemedIcon name="chevron-forward-sharp" size={22} color={"grey"} />
       </View>
