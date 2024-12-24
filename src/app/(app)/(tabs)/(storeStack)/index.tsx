@@ -7,7 +7,8 @@ import useSortedProducts from "@/hooks/useSortedProducts";
 import { sizeConstants } from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
 import { router, Stack } from "expo-router";
-import React, { useMemo } from "react";
+import LottieView from "lottie-react-native";
+import React, { memo, useRef } from "react";
 import { FlatList, StyleSheet, View, type ListRenderItem } from "react-native";
 
 export default function StoreScreen() {
@@ -15,20 +16,38 @@ export default function StoreScreen() {
   const { filteredProducts } = useFilteredProducts();
   const { products, activeMapper } = useSortedProducts(filteredProducts);
 
-  const renderAsProducts: ListRenderItem<Product> = useMemo(
-    () =>
-      ({ item }) => {
-        return (
-          <View style={styles.productCardContainer} key={item.id}>
-            <ProductCard item={item}>
-              <ProductCard.Color />
-              <ProductCard.Price />
-            </ProductCard>
-          </View>
-        );
-      },
-    [],
-  );
+  const renderAsProducts: ListRenderItem<Product> = ({ item }) => {
+    return (
+      <View style={styles.productCardContainer} key={item.id}>
+        <ProductCard item={item}>
+          <ProductCard.Color />
+          <ProductCard.Price />
+        </ProductCard>
+      </View>
+    );
+  };
+
+  const EmptyComponent = memo(() => {
+    const animation = useRef<LottieView>(null);
+    return (
+      <View
+        style={{
+          alignSelf: "center",
+        }}
+      >
+        <LottieView
+          autoPlay
+          ref={animation}
+          style={{
+            width: 200,
+            height: 200,
+            backgroundColor: "transparent",
+          }}
+          source={require("@/assets/lottieAnimations/listEmptyAnimation.json")}
+        />
+      </View>
+    );
+  });
 
   return (
     <ThemedSafeAreaView style={styles.container} edges={["left", "right"]}>
@@ -68,6 +87,7 @@ export default function StoreScreen() {
             />
           </View>
         }
+        ListEmptyComponent={EmptyComponent}
       />
     </ThemedSafeAreaView>
   );
