@@ -5,6 +5,8 @@ import { ThemedText } from "@/components/ThemedText";
 import { useCartContext } from "@/contexts/cartContext/CartContext";
 import { useThemeColor } from "@/hooks/useThemeColor";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
+import { Ionicons } from "@expo/vector-icons";
+import { router, Stack } from "expo-router";
 import React, { memo, useCallback } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
@@ -32,6 +34,18 @@ export default function Cart() {
 
   return (
     <ThemedView style={[{ backgroundColor }, styles.flatListContainer]}>
+      <Stack.Screen
+        options={{
+          headerRight: () => (
+            <Ionicons
+              name="close-outline"
+              color={"grey"}
+              size={28}
+              onPress={() => router.back()}
+            />
+          ),
+        }}
+      />
       <FlatList
         data={cart.cartItems}
         contentContainerStyle={styles.ContentContainer}
