@@ -15,7 +15,13 @@ import {
 } from "@/theme/styleConstants";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function FilterBottomSheet() {
   const { selectedFilters, setFilters } = useProductListContext();
@@ -48,7 +54,10 @@ export default function FilterBottomSheet() {
   };
 
   return (
-    <View style={styles.modalContainer}>
+    <KeyboardAvoidingView
+      style={styles.modalContainer}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
+    >
       <ThemedView style={styles.modal}>
         <View style={styles.titleContainer}>
           <ThemedText style={styles.title}>Filters</ThemedText>
@@ -126,7 +135,7 @@ export default function FilterBottomSheet() {
           </View>
         </View>
       </ThemedView>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -137,7 +146,7 @@ const styles = StyleSheet.create({
     backgroundColor: colorConstants.backgroundDimmed,
   },
   modal: {
-    height: "50%",
+    height: 400,
     // backgroundColor: colorConstants.backgroundLight,
     borderTopRightRadius: sizeConstants.borderRadiusDefault,
     borderTopLeftRadius: sizeConstants.borderRadiusDefault,
