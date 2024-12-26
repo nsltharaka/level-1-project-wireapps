@@ -7,7 +7,8 @@ import { useThemeColor } from "@/hooks/useThemeColor";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import { router, Stack } from "expo-router";
-import React, { memo, useCallback } from "react";
+import LottieView from "lottie-react-native";
+import React, { memo, useCallback, useRef } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
 export default function Cart() {
@@ -26,11 +27,25 @@ export default function Cart() {
     [cart],
   );
 
-  const EmptyComponent = memo(() => (
-    <View style={styles.emptyComponent}>
-      <ThemedText>Your cart is empty.</ThemedText>
-    </View>
-  ));
+  const EmptyComponent = memo(() => {
+    const animation = useRef<LottieView>(null);
+    return (
+      <View style={styles.emptyComponent}>
+        <LottieView
+          autoPlay
+          speed={0.3}
+          ref={animation}
+          style={{
+            width: 200,
+            aspectRatio: 1,
+            backgroundColor: "transparent",
+          }}
+          source={require("@/assets/lottieAnimations/emptyCartAnimation.json")}
+        />
+        <ThemedText>Your cart is Empty</ThemedText>
+      </View>
+    );
+  });
 
   return (
     <ThemedView style={[{ backgroundColor }, styles.flatListContainer]}>
@@ -50,7 +65,9 @@ export default function Cart() {
         data={cart.cartItems}
         contentContainerStyle={styles.ContentContainer}
         renderItem={({ item }) => <CartItemCard item={item} />}
-        ListFooterComponent={FooterComponent}
+        ListFooterComponent={
+          cart.cartItems.length >= 1 ? FooterComponent : null
+        }
         ListEmptyComponent={EmptyComponent}
       />
       <ActionButton
@@ -85,6 +102,7 @@ const styles = StyleSheet.create({
   },
   emptyComponent: {
     height: "100%",
+    alignItems: "center",
     justifyContent: "center",
   },
   actionButton: {
