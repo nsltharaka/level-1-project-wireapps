@@ -3,23 +3,45 @@ import ProfileOptionButton from "@/components/profileScreen/ProfileOptionButton"
 import SettingOption from "@/components/profileScreen/SettingOption";
 import { ThemedText } from "@/components/ThemedText";
 import { useGlobalContext } from "@/contexts/GlobalContext";
+import useImagePicker from "@/hooks/useImagePicker";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
-import { Button, Image, StyleSheet, View } from "react-native";
+import {
+  Button,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+
+const placeholderImage = require("@/assets/images/avatar.png");
 
 export default function ProfileScreen() {
   const { isDarkTheme, toggleDarkTheme } = useGlobalContext();
+  const { pickImageAsync } = useImagePicker();
+
+  const [profileImage, setProfileImage] = React.useState<string | null>(null);
+
+  const onImagePicked = async () => {
+    const image = await pickImageAsync();
+    if (image) {
+      setProfileImage(image);
+    }
+  };
 
   return (
     <ThemedSafeAreaView style={styles.container}>
       <View style={styles.profileInfoContainer}>
-        <View style={styles.profileImageContainer}>
+        <TouchableOpacity
+          style={styles.profileImageContainer}
+          onPress={onImagePicked}
+        >
           <Image
             style={styles.avatar}
-            source={require("@/assets/images/avatar.png")}
+            source={profileImage ? { uri: profileImage } : placeholderImage}
           />
-        </View>
+        </TouchableOpacity>
         <ThemedText style={styles.userName}>John Smith</ThemedText>
         <View style={styles.optionsContainer}>
           <ProfileOptionButton buttonName="Orders" icon="archive-outline" />
@@ -52,7 +74,11 @@ const styles = StyleSheet.create({
     gap: sizeConstants.flexGapLarge,
     padding: sizeConstants.flexGapLarge,
   },
-  profileImageContainer: {},
+  profileImageContainer: {
+    width: 80,
+    borderRadius: 100,
+    overflow: "hidden",
+  },
   avatar: {
     width: 80,
     aspectRatio: 1,
