@@ -4,7 +4,7 @@ import {
   fontConstants,
   sizeConstants,
 } from "@/theme/styleConstants";
-import type { CartItem } from "@/types/cartItem";
+import type { Product } from "@/types/product";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
@@ -14,11 +14,11 @@ import { ThemedIcon } from "../ThemedIcon";
 import { ThemedText } from "../ThemedText";
 
 type Props = {
-  item: CartItem;
+  item: Product & { quantityInCart: number };
 };
 
 export default function CartItemCard({ item }: Props) {
-  const [_, dispatch] = useCartContext();
+  const { addQuantity, removeItem } = useCartContext();
 
   return (
     <ThemedView lightColor={colorConstants.white} style={styles.container}>
@@ -36,24 +36,14 @@ export default function CartItemCard({ item }: Props) {
         <View style={styles.quantityAdjuster}>
           <ThemedTouchableOpacity
             style={styles.adjustButton}
-            onPress={() =>
-              dispatch({
-                type: "adjustQuantity",
-                data: { itemId: item.id, newQuantity: -1 },
-              })
-            }
+            onPress={() => addQuantity(item.id, -1)}
           >
             <ThemedIcon name="remove" size={22} />
           </ThemedTouchableOpacity>
-          <ThemedText>{item.quantity}</ThemedText>
+          <ThemedText>{item.quantityInCart}</ThemedText>
           <ThemedTouchableOpacity
             style={styles.adjustButton}
-            onPress={() =>
-              dispatch({
-                type: "adjustQuantity",
-                data: { itemId: item.id, newQuantity: 1 },
-              })
-            }
+            onPress={() => addQuantity(item.id, 1)}
           >
             <ThemedIcon name="add" size={22} />
           </ThemedTouchableOpacity>
@@ -62,7 +52,7 @@ export default function CartItemCard({ item }: Props) {
 
       <TouchableOpacity
         style={{ alignSelf: "flex-start" }}
-        onPress={() => dispatch({ type: "removeItem", data: item.id })}
+        onPress={() => removeItem(item.id)}
       >
         <View style={styles.actionButtonContainer}>
           <Ionicons name="close-circle" size={28} color={"gray"} />

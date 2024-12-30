@@ -46,7 +46,7 @@ export function useProductContext() {
         if (product.id === id) {
           return {
             ...product,
-            quantity,
+            quantity: product.quantity + quantity,
           };
         }
         return product;

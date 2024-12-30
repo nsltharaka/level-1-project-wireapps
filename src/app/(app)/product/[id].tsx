@@ -4,28 +4,31 @@ import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
 import { ThemedText } from "@/components/ThemedText";
 import { useCartContext } from "@/contexts/cartContext/CartContext";
 import { useFavoritesContext } from "@/contexts/favorites/FavoritesContext";
-import { getProductById } from "@/services/productService";
+import { useProductContext } from "@/contexts/productList/ProductContext";
 import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useEffect, useState } from "react";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
+import React, { useCallback, useState } from "react";
 import { Image, StyleSheet, Text } from "react-native";
 
 export default function ProductDetailsScreen() {
   const params = useLocalSearchParams<{ id: string }>();
+  const { products } = useProductContext();
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(
     undefined,
   );
 
-  const [_, dispatch] = useCartContext();
+  const { addItem } = useCartContext();
   const router = useRouter();
 
   const { isInFavorites, removeFromFavorites, addToFavorites } =
     useFavoritesContext();
 
-  useEffect(() => {
-    setSelectedProduct(getProductById(params.id));
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      setSelectedProduct(products.find((product) => product.id === params.id));
+    }, [products]),
+  );
 
   if (!selectedProduct) return null;
 
@@ -46,7 +49,9 @@ export default function ProductDetailsScreen() {
         {outOfStockItem ? (
           <Text style={{ color: "red" }}>Out of stock</Text>
         ) : (
-          <Text style={{ color: "green" }}>in stock</Text>
+          <Text style={{ color: "green" }}>
+            {selectedProduct.quantity} in stock
+          </Text>
         )}
         <ThemedText style={styles.itemPrice}>
           $ {selectedProduct.price}
@@ -72,17 +77,14 @@ export default function ProductDetailsScreen() {
           {selectedProduct.description}
         </ThemedText>
       </ParallaxScrollView>
-      {selectedProduct.quantity > 0 && (
+      {!outOfStockItem && (
         <ActionButton
           title="Add to cart"
           iconProps={{ name: "cart", size: 30 }}
           style={styles.actionButton}
           textStyles={styles.actionButtonText}
           onPress={() => {
-            dispatch({
-              type: "addItem",
-              data: { ...selectedProduct, quantity: 1 },
-            });
+            addItem(selectedProduct.id);
             router.push("/(modals)/cart");
           }}
         />

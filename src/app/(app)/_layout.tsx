@@ -1,5 +1,5 @@
 import CartIcon from "@/components/cart/CartIcon";
-import CartContextProvider from "@/contexts/cartContext/CartContext";
+import { CartContextProvider } from "@/contexts/cartContext/CartContext";
 import FavoritesContextProvider from "@/contexts/favorites/FavoritesContext";
 import { useGlobalContext } from "@/contexts/GlobalContext";
 import ProductContextProvider from "@/contexts/productList/ProductContext";

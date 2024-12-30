@@ -6,9 +6,9 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ThemedIcon } from "../ThemedIcon";
 
 export default function CartIcon() {
-  const [cart] = useCartContext();
+  const { cartItems } = useCartContext();
 
-  const cartItemsLength = cart.cartItems.length;
+  const cartItemsLength = cartItems.length;
   const label =
     cartItemsLength === 0
       ? null

@@ -8,23 +8,20 @@ import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import { Ionicons } from "@expo/vector-icons";
 import { router, Stack } from "expo-router";
 import LottieView from "lottie-react-native";
-import React, { memo, useCallback, useRef } from "react";
+import React, { memo, useRef } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
 export default function Cart() {
-  const [cart] = useCartContext();
+  const { cartItems, cartTotal, getCartItems } = useCartContext();
 
   const backgroundColor = useThemeColor({}, "baseBackground");
 
-  const FooterComponent = useCallback(
-    () => (
-      <View style={styles.cartDescription}>
-        <ThemedText style={styles.totalAmount}>
-          Total : $ {cart.totalAmount}
-        </ThemedText>
-      </View>
-    ),
-    [cart],
+  const FooterComponent = () => (
+    <View style={styles.cartDescription}>
+      <ThemedText style={styles.totalAmount}>
+        Total : $ {cartTotal.toFixed(2)}
+      </ThemedText>
+    </View>
   );
 
   const EmptyComponent = memo(() => {
@@ -62,12 +59,10 @@ export default function Cart() {
         }}
       />
       <FlatList
-        data={cart.cartItems}
+        data={getCartItems()}
         contentContainerStyle={styles.ContentContainer}
         renderItem={({ item }) => <CartItemCard item={item} />}
-        ListFooterComponent={
-          cart.cartItems.length >= 1 ? FooterComponent : null
-        }
+        ListFooterComponent={cartItems.length >= 1 ? FooterComponent : null}
         ListEmptyComponent={EmptyComponent}
       />
       <ActionButton

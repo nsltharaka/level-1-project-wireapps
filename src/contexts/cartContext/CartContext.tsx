@@ -1,68 +1,109 @@
 import type { CartItem } from "@/types/cartItem";
-import React, {
-  createContext,
-  useContext,
-  useReducer,
-  type PropsWithChildren,
-} from "react";
-import { addItem, adjustQuantity, removeItem } from "./reducers";
+import React, { createContext, type PropsWithChildren } from "react";
+import { useProductContext } from "../productList/ProductContext";
 
-export type State = {
+export const CartContext = createContext<{
   cartItems: CartItem[];
-  totalAmount: number | string;
-};
+  setCartItems: (newCartItems: CartItem[]) => void;
+} | null>(null);
 
-export const CartContext = createContext<
-  [State, React.Dispatch<Action>] | null
->(null);
+export function CartContextProvider({ children }: PropsWithChildren) {
+  const [cartItems, set] = React.useState<CartItem[]>([]);
 
-export default function CartContextProvider({ children }: PropsWithChildren) {
+  const setCartItems = (newCartItems: CartItem[]) => set(newCartItems);
+
   return (
     <CartContext.Provider
-      value={useReducer(
-        reducer,
-        null,
-        (): State => ({
-          cartItems: [],
-          totalAmount: 0,
-        }),
-      )}
+      value={{
+        cartItems,
+        setCartItems,
+      }}
     >
       {children}
     </CartContext.Provider>
   );
 }
 
-export type Action =
-  | { type: "addItem"; data: CartItem }
-  | { type: "removeItem"; data: CartItem["id"] }
-  | {
-      type: "adjustQuantity";
-      data: { itemId: CartItem["id"]; newQuantity: CartItem["quantity"] };
-    };
-
-const reducer = (state: State, action: Action): State => {
-  const { type, data } = action;
-
-  switch (type) {
-    case "addItem":
-      return addItem(state, data);
-    case "removeItem":
-      return removeItem(state, data);
-    case "adjustQuantity":
-      return adjustQuantity(state, data);
-
-    default:
-      return state;
+export function useCartContext() {
+  const { products, adjustQuantity } = useProductContext();
+  const context = React.useContext(CartContext);
+  if (!context) {
+    throw new Error("useCartContext must be used within a CartContextProvider");
   }
-};
+  const { cartItems, setCartItems } = context;
 
-// custom hook to use cart context
-export const useCartContext = () => {
-  const contextValue = useContext(CartContext);
-  if (!contextValue) {
-    throw new Error("component must be wrapped inside CartContextProvider");
-  }
+  const [cartTotal, setCartTotal] = React.useState(0.0);
 
-  return contextValue;
-};
+  const addItem = (itemId: string) => {
+    if (cartItems.find((item) => item.productId === itemId)) {
+      return;
+    }
+    setCartItems([...cartItems, { productId: itemId, quantityInCart: 1 }]);
+    adjustQuantity(itemId, -1);
+  };
+
+  const removeItem = (itemId: string) => {
+    const item = cartItems.find((item) => item.productId === itemId);
+    setCartItems(cartItems.filter((item) => item.productId !== itemId));
+    adjustQuantity(itemId, item!.quantityInCart);
+  };
+
+  const addQuantity = (itemId: string, newQuantity: number) => {
+    const product = products.find((product) => product.id === itemId);
+    const item = cartItems.find((item) => item.productId === itemId);
+    if (!product || !item) {
+      return;
+    }
+
+    if (newQuantity < 0 && item.quantityInCart === 1) {
+      return;
+    }
+
+    if (product.quantity < newQuantity) {
+      alert("Not enough stock");
+      return;
+    }
+
+    setCartItems(
+      cartItems.map((item) => {
+        if (item.productId !== itemId) {
+          return item;
+        }
+        return {
+          ...item,
+          quantityInCart: item.quantityInCart + newQuantity,
+        };
+      }),
+    );
+    adjustQuantity(itemId, newQuantity * -1);
+  };
+
+  const getCartItems = () => {
+    return cartItems.map((item) => {
+      const product = products.find(
+        (product) => product.id === item.productId,
+      )!;
+      return {
+        ...product,
+        quantityInCart: item.quantityInCart,
+      };
+    });
+  };
+
+  React.useEffect(() => {
+    const total = getCartItems().reduce(
+      (acc, item) => acc + parseFloat(item.price!) * item.quantityInCart,
+      0,
+    );
+    setCartTotal(total);
+  }, [cartItems, products]);
+
+  return {
+    addItem,
+    addQuantity,
+    removeItem,
+    getCartItems,
+    cartItems,
+    cartTotal,
+  };
+}

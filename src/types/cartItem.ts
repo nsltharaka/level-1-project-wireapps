@@ -1,5 +1,4 @@
-import type { Product } from "./product";
-
-export type CartItem = Product & {
-  quantity: number;
+export type CartItem = {
+  productId: string;
+  quantityInCart: number;
 };
