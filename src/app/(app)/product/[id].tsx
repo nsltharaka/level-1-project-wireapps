@@ -9,7 +9,7 @@ import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import type { Product } from "@/types/product";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, Text } from "react-native";
 
 export default function ProductDetailsScreen() {
   const params = useLocalSearchParams<{ id: string }>();
@@ -30,6 +30,7 @@ export default function ProductDetailsScreen() {
   if (!selectedProduct) return null;
 
   const isItemFavorite = isInFavorites(selectedProduct.id);
+  const outOfStockItem = selectedProduct.quantity === 0;
 
   return (
     <ThemedSafeAreaView style={{ flex: 1 }} edges={["bottom", "left", "right"]}>
@@ -42,6 +43,11 @@ export default function ProductDetailsScreen() {
         }
       >
         <ThemedText style={styles.itemName}>{selectedProduct.name}</ThemedText>
+        {outOfStockItem ? (
+          <Text style={{ color: "red" }}>Out of stock</Text>
+        ) : (
+          <Text style={{ color: "green" }}>in stock</Text>
+        )}
         <ThemedText style={styles.itemPrice}>
           $ {selectedProduct.price}
         </ThemedText>
@@ -66,19 +72,21 @@ export default function ProductDetailsScreen() {
           {selectedProduct.description}
         </ThemedText>
       </ParallaxScrollView>
-      <ActionButton
-        title="Add to cart"
-        iconProps={{ name: "cart", size: 30 }}
-        style={styles.actionButton}
-        textStyles={styles.actionButtonText}
-        onPress={() => {
-          dispatch({
-            type: "addItem",
-            data: { ...selectedProduct, quantity: 1 },
-          });
-          router.push("/(modals)/cart");
-        }}
-      />
+      {selectedProduct.quantity > 0 && (
+        <ActionButton
+          title="Add to cart"
+          iconProps={{ name: "cart", size: 30 }}
+          style={styles.actionButton}
+          textStyles={styles.actionButtonText}
+          onPress={() => {
+            dispatch({
+              type: "addItem",
+              data: { ...selectedProduct, quantity: 1 },
+            });
+            router.push("/(modals)/cart");
+          }}
+        />
+      )}
     </ThemedSafeAreaView>
   );
 }
