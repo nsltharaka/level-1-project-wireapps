@@ -10,6 +10,7 @@ import {
 
 interface ProductContext {
   products: Product[];
+  updateProducts: (newProducts: Product[]) => void;
 }
 
 const ProductContext = createContext<ProductContext | null>(null);
@@ -18,12 +19,16 @@ export default function ProductContextProvider({
 }: PropsWithChildren) {
   const [products, setProducts] = useState<Product[]>([]);
 
+  const updateProducts = (newProducts: Product[]) => {
+    setProducts(newProducts);
+  };
+
   useEffect(() => {
     setProducts(getAllProducts());
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products }}>
+    <ProductContext.Provider value={{ products, updateProducts }}>
       {children}
     </ProductContext.Provider>
   );
@@ -34,5 +39,20 @@ export function useProductContext() {
   if (!value) {
     throw new Error("component must be wrapped inside ProductContextProvider");
   }
-  return value;
+
+  const adjustQuantity = (id: string, quantity: number) => {
+    value.updateProducts(
+      value.products.map((product) => {
+        if (product.id === id) {
+          return {
+            ...product,
+            quantity,
+          };
+        }
+        return product;
+      }),
+    );
+  };
+
+  return { products: value.products, adjustQuantity };
 }
