@@ -1,5 +1,4 @@
 import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
-import ProfileOptionButton from "@/components/profileScreen/ProfileOptionButton";
 import SettingOption from "@/components/profileScreen/SettingOption";
 import { ThemedText } from "@/components/ThemedText";
 import { useGlobalContext } from "@/contexts/GlobalContext";
@@ -8,6 +7,7 @@ import { fontConstants, sizeConstants } from "@/theme/styleConstants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import {
+  Alert,
   Button,
   Image,
   StyleSheet,
@@ -22,6 +22,7 @@ export default function ProfileScreen() {
   const { pickImageAsync } = useImagePicker();
 
   const [profileImage, setProfileImage] = React.useState<string | null>(null);
+  const [userName, setUserName] = React.useState<string>("John Smith");
 
   const onImagePicked = async () => {
     const image = await pickImageAsync();
@@ -42,12 +43,32 @@ export default function ProfileScreen() {
             source={profileImage ? { uri: profileImage } : placeholderImage}
           />
         </TouchableOpacity>
-        <ThemedText style={styles.userName}>John Smith</ThemedText>
-        <View style={styles.optionsContainer}>
+        <ThemedText style={styles.userName}>{userName}</ThemedText>
+        <Button
+          title="edit profile"
+          onPress={() => {
+            Alert.prompt(
+              "Username",
+              "Enter your username",
+              [
+                { text: "cancel", style: "destructive", onPress: () => {} },
+                {
+                  text: "save",
+                  onPress: (name) => {
+                    if (name) setUserName(name);
+                  },
+                },
+              ],
+              "plain-text",
+              userName || "John Smith",
+            );
+          }}
+        />
+        {/* <View style={styles.optionsContainer}>
           <ProfileOptionButton buttonName="Orders" icon="archive-outline" />
           <ProfileOptionButton buttonName="Pass" icon="ticket-outline" />
           <ProfileOptionButton buttonName="Events" icon="calendar-outline" />
-        </View>
+        </View> */}
       </View>
       <View style={styles.settingsPanel}>
         <SettingOption
