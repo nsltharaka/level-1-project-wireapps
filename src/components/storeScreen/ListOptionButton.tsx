@@ -11,18 +11,27 @@ type Props = {
   icon: ComponentProps<typeof Ionicons>["name"];
   iconSize?: ComponentProps<typeof Ionicons>["size"];
   label: string;
+  activeIndicator?: boolean;
 };
 
 export default function ListOptionButton({
   icon,
   iconSize,
   label,
+  activeIndicator,
   onPress,
 }: Props) {
   return (
     <ThemedTouchableOpacity onPress={onPress} style={styles.container}>
       <ThemedIcon name={icon} size={iconSize} />
       <ThemedText>{label}</ThemedText>
+      {activeIndicator && (
+        <ThemedIcon
+          name="alert-circle-sharp"
+          size={22}
+          style={styles.activeIndicator}
+        />
+      )}
     </ThemedTouchableOpacity>
   );
 }
@@ -37,5 +46,10 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
+  },
+  activeIndicator: {
+    position: "absolute",
+    top: -5,
+    right: -5,
   },
 });

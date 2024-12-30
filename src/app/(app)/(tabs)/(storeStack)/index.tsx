@@ -1,6 +1,7 @@
 import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
 import ListOptionButton from "@/components/storeScreen/ListOptionButton";
 import ProductCard from "@/components/storeScreen/ProductCard";
+import { useProductListContext } from "@/contexts/productList/ProductListContext";
 import useDebounceSearch from "@/hooks/useDebounceSearch";
 import useFilteredProducts from "@/hooks/useFilteredProducts";
 import useSortedProducts from "@/hooks/useSortedProducts";
@@ -15,6 +16,7 @@ export default function StoreScreen() {
   const { setSearchKeywordWithDebounce } = useDebounceSearch();
   const { filteredProducts } = useFilteredProducts();
   const { products, activeMapper } = useSortedProducts(filteredProducts);
+  const { selectedFilters } = useProductListContext();
 
   const renderAsProducts: ListRenderItem<Product> = ({ item }) => {
     return (
@@ -78,6 +80,12 @@ export default function StoreScreen() {
               icon="filter"
               label="Filters"
               onPress={() => router.push("/(modals)/filterBottomSheet")}
+              activeIndicator={
+                selectedFilters.brand !== "any" ||
+                selectedFilters.color !== "any" ||
+                selectedFilters.priceRange[0] !== 0 ||
+                selectedFilters.priceRange[1] !== 0
+              }
             />
             <ListOptionButton
               icon="chevron-expand-outline"
@@ -104,7 +112,7 @@ const styles = StyleSheet.create({
   listOptionsContainer: {
     flexDirection: "row",
     gap: sizeConstants.flexGapMedium,
-    marginBottom: sizeConstants.marginMedium,
+    paddingVertical: sizeConstants.paddingSmall,
   },
   contentContainer: {
     gap: sizeConstants.flexGapMedium,

@@ -36,6 +36,7 @@ export default function ProductListContextProvider({
     color: "any",
     priceRange: [0, 0],
   });
+
   const [selectedSortStrategy, setSelectedSortStrategy] =
     useState<DefaultMapper>("none");
   const [searchKeyword, setKeyword] = useState("");
