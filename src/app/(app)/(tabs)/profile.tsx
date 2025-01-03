@@ -8,6 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import {
   Alert,
+  Appearance,
   Button,
   Image,
   StyleSheet,
@@ -75,9 +76,8 @@ export default function ProfileScreen() {
           title="Dark mode"
           value={userData.colorSchemePreference === "dark"}
           onToggle={() =>
-            updateUserData(
-              "colorSchemePreference",
-              userData.colorSchemePreference === "dark" ? "dark" : "light",
+            Appearance.setColorScheme(
+              userData.colorSchemePreference === "dark" ? "light" : "dark",
             )
           }
         />
