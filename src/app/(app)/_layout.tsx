@@ -9,9 +9,9 @@ import { Colors } from "@/theme/Colors";
 import { Redirect, Stack } from "expo-router";
 
 export default function AppLayout() {
-  const { onboarded } = useGlobalContext();
+  const { userData } = useGlobalContext();
 
-  if (!onboarded) {
+  if (userData.onboarded === false) {
     return <Redirect href="/onboarding/0" />;
   }
 

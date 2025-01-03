@@ -1,44 +1,48 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useCallback, useEffect, useState } from "react";
 
-const useAsyncStorage = (key: string) => {
-  const [loaded, setLoaded] = useState(false);
+const useAsyncStorage = <T extends string | object>(key: string) => {
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState<string | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
-  // get
+  // gets the data on mount
   useEffect(() => {
-    setLoaded(false);
+    setLoading(true);
     AsyncStorage.getItem(key)
       .then((value) => setData(value))
       .catch((err) => {
         console.log("async storage is unavailable. error: \n", err);
         setError(err);
       })
-      .finally(() => setLoaded(true));
-  }, [key]);
+      .finally(() => setLoading(false));
+  }, []);
 
-  //set
+  // sets the data
   const setValue = useCallback(
-    async (value: string | null) => {
-      setLoaded(false);
+    async (value: T) => {
       try {
+        // remove the key if value is null
         if (value == null) {
           await AsyncStorage.removeItem(key);
-        } else {
+          return;
+        }
+
+        // update the async storage
+        if (typeof value === "string") {
           await AsyncStorage.setItem(key, value);
+        } else if (typeof data === "object") {
+          await AsyncStorage.setItem(key, JSON.stringify(value));
         }
       } catch (error) {
         console.log("async storage is unavailable. error: \n", error);
-      } finally {
-        setLoaded(true);
       }
     },
     [key],
   );
 
   return {
-    loaded,
+    loading,
     data,
     error,
     setValue,

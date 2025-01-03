@@ -1,10 +1,9 @@
+import type { User } from "@/types/user";
 import { createContext, useContext } from "react";
 
 type GlobalContext = {
-  onboarded: boolean;
-  setAsOnboarded: () => Promise<void>;
-  isDarkTheme: boolean;
-  toggleDarkTheme: () => void;
+  userData: User;
+  updateUserData: <T extends keyof User>(key: T, value: User[T]) => void;
 };
 
 export const GlobalContext = createContext<GlobalContext | undefined>(

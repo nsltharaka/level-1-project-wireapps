@@ -24,7 +24,7 @@ const pages = [
 ];
 
 export default function Onboarding() {
-  const { setAsOnboarded } = useGlobalContext();
+  const { updateUserData } = useGlobalContext();
   const { id } = useLocalSearchParams<{ id: string }>();
   const index = parseInt(id);
 
@@ -34,7 +34,7 @@ export default function Onboarding() {
       return;
     }
 
-    setAsOnboarded();
+    updateUserData("onboarded", true);
     router.replace("/");
   };
 

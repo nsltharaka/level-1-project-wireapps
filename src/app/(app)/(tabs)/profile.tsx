@@ -18,7 +18,7 @@ import {
 const placeholderImage = require("@/assets/images/avatar.png");
 
 export default function ProfileScreen() {
-  const { isDarkTheme, toggleDarkTheme } = useGlobalContext();
+  const { userData, updateUserData } = useGlobalContext();
   const { pickImageAsync } = useImagePicker();
 
   const [profileImage, setProfileImage] = React.useState<string | null>(null);
@@ -73,8 +73,13 @@ export default function ProfileScreen() {
       <View style={styles.settingsPanel}>
         <SettingOption
           title="Dark mode"
-          value={isDarkTheme}
-          onToggle={toggleDarkTheme}
+          value={userData.colorSchemePreference === "dark"}
+          onToggle={() =>
+            updateUserData(
+              "colorSchemePreference",
+              userData.colorSchemePreference === "dark" ? "dark" : "light",
+            )
+          }
         />
         <Button title="clear async storage" onPress={clearAsyncStorage} />
       </View>
@@ -83,7 +88,7 @@ export default function ProfileScreen() {
 }
 
 const clearAsyncStorage = async () => {
-  await AsyncStorage.removeItem("@onboarded");
+  await AsyncStorage.removeItem("@userdata");
 };
 
 const styles = StyleSheet.create({
