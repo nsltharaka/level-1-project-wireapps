@@ -43,10 +43,11 @@ export default function FavoritesScreen() {
     );
   });
 
+  //TODO : double check whether we can use usecallback like this
   useFocusEffect(
     useCallback(() => {
       setEditMode(false);
-    }, []),
+    }, [])
   );
 
   return (

@@ -17,6 +17,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen name="index" options={{ href: null }} />
+      {/* TODO: Move these name to a const file or export it from the screen file to avoid conflicts */}
       <Tabs.Screen
         name="(homeStack)"
         options={{

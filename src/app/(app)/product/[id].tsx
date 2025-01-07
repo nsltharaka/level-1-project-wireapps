@@ -15,7 +15,7 @@ export default function ProductDetailsScreen() {
   const params = useLocalSearchParams<{ id: string }>();
   const { products } = useProductContext();
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(
-    undefined,
+    undefined
   );
 
   const { addItem } = useCartContext();
@@ -27,7 +27,7 @@ export default function ProductDetailsScreen() {
   useFocusEffect(
     useCallback(() => {
       setSelectedProduct(products.find((product) => product.id === params.id));
-    }, [products]),
+    }, [products])
   );
 
   if (!selectedProduct) return null;
@@ -73,6 +73,7 @@ export default function ProductDetailsScreen() {
             size: 20,
           }}
         />
+        {/*TODO: descrption is partially visible */}
         <ThemedText style={styles.itemDescription}>
           {selectedProduct.description}
         </ThemedText>

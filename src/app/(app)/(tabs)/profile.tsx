@@ -1,4 +1,6 @@
 import ThemedSafeAreaView from "@/components/containers/ThemedSafeAreaView";
+//TODO: Remove unused codes
+import ProfileOptionButton from "@/components/profileScreen/ProfileOptionButton";
 import SettingOption from "@/components/profileScreen/SettingOption";
 import { ThemedText } from "@/components/ThemedText";
 import { useGlobalContext } from "@/contexts/GlobalContext";
@@ -19,6 +21,7 @@ import {
 const placeholderImage = require("@/assets/images/avatar.png");
 
 export default function ProfileScreen() {
+  //TODO: use meaning full names for variable and methods change this -> useGlobalContext
   const { userData, updateUserData } = useGlobalContext();
   const { pickImageAsync } = useImagePicker();
 
@@ -45,6 +48,7 @@ export default function ProfileScreen() {
           />
         </TouchableOpacity>
         <ThemedText style={styles.userName}>{userName}</ThemedText>
+        {/* Make a seperate funtion for this button onPress event for more readability */}
         <Button
           title="edit profile"
           onPress={() => {
@@ -61,10 +65,11 @@ export default function ProfileScreen() {
                 },
               ],
               "plain-text",
-              userName || "John Smith",
+              userName || "John Smith"
             );
           }}
         />
+        {/*TODO: Remove unused codes */}
         {/* <View style={styles.optionsContainer}>
           <ProfileOptionButton buttonName="Orders" icon="archive-outline" />
           <ProfileOptionButton buttonName="Pass" icon="ticket-outline" />
@@ -75,9 +80,10 @@ export default function ProfileScreen() {
         <SettingOption
           title="Dark mode"
           value={userData.colorSchemePreference === "dark"}
+          // TODO: Move these dark and like key words into a constant file
           onToggle={() =>
             Appearance.setColorScheme(
-              userData.colorSchemePreference === "dark" ? "light" : "dark",
+              userData.colorSchemePreference === "dark" ? "light" : "dark"
             )
           }
         />
@@ -87,6 +93,7 @@ export default function ProfileScreen() {
   );
 }
 
+//TODO: move this function above the component
 const clearAsyncStorage = async () => {
   await AsyncStorage.removeItem("@userdata");
 };
