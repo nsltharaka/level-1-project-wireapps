@@ -7,9 +7,10 @@ type GlobalContext = {
 };
 
 export const GlobalContext = createContext<GlobalContext | undefined>(
-  undefined,
+  undefined
 );
 
+//Good error handling
 export function useGlobalContext() {
   const value = useContext(GlobalContext);
   if (!value) {

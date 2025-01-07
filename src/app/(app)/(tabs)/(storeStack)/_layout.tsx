@@ -4,6 +4,7 @@ import { Colors } from "@/theme/Colors";
 import { Stack } from "expo-router";
 import React from "react";
 
+//TODO: Why every tab needs a _layout file like this ? Double check with the Expo doc
 export default function StoreStack() {
   const colorScheme = useColorScheme();
   return (
